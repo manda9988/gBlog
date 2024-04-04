@@ -7,7 +7,7 @@ export default function Home() {
     <div className={styles.container}>
       <h1>Bienvenue sur gBlog</h1>
       <p>
-        Articles sur différents sujets.
+        Des articles sur différents sujets.
       </p>
 
       <nav>
