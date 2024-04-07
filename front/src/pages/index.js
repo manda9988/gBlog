@@ -19,7 +19,7 @@ export default function Home() {
           </li>
           <li>
             <Link href="/about" legacyBehavior>
-              <a>À propos du blog</a>
+              <a>À propos</a>
             </Link>
           </li>
         </ul>
