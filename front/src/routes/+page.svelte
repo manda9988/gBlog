@@ -29,7 +29,7 @@
 		grid-template-columns: repeat(3, 28vw);
 		justify-content: center;
 		gap: 4px;
-		margin: 16px 0;
+		margin: 28px 0;
 		background: rgb(238, 238, 238);
 
 		.article-preview {

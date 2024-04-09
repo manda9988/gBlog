@@ -1,8 +1,10 @@
 <!-- src/lib/Nav.svelte -->
 <nav>
-	<a href="/">Accueil</a>
-	<a href="/articles">Articles</a>
-	<a href="/compte">Compte</a>
+	<a href="/">Home</a>
+	<a href="/all">All</a>
+	<a href="/publish">Publish</a>
+	<a href="/account">Account</a>
+	<a href="/login">Login</a>
 </nav>
 
 <style lang="scss">
@@ -15,9 +17,9 @@
 			color: rgb(238, 238, 238);
 			margin: 0 1rem;
 			text-decoration: none;
-			text-transform: uppercase;
+			// text-transform: uppercase;
 			font-size: 0.95rem;
-			font-weight: 600;
+			font-weight: 500;
 
 			&:hover {
 				color: grey;
