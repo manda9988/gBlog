@@ -17,13 +17,19 @@
 	<Footer />
 </div>
 
-<style>
+<style lang="scss">
 	.layout-container {
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
-	}
-	main {
-		flex: 1;
+
+		main {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+			background: rgb(238, 238, 238);
+		}
 	}
 </style>
