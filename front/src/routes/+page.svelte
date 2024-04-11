@@ -1,24 +1,22 @@
 <!-- src/routes/+page.svelte -->
 <script>
 	const articles = [
-		{ title: 'Article 1', image: '' },
-		{ title: 'Article 2', image: '' },
-		{ title: 'Article 3', image: '' },
-		{ title: 'Article 4', image: '' },
-		{ title: 'Article 5', image: '' },
-		{ title: 'Article 6', image: '' },
-		{ title: 'Article 7', image: '' },
-		{ title: 'Article 8', image: '' },
-		{ title: 'Article 9', image: '' },
-		{ title: 'Article 10', image: '' }
+		{ title: 'Article 1' },
+		{ title: 'Article 2' },
+		{ title: 'Article 3' },
+		{ title: 'Article 4' },
+		{ title: 'Article 5' },
+		{ title: 'Article 6' },
+		{ title: 'Article 7' },
+		{ title: 'Article 8' },
+		{ title: 'Article 9' }
 	];
 </script>
 
 <div class="gallery">
-	{#each articles as { title, image }}
+	{#each articles as { title }}
 		<div class="article-preview">
-			<img src={image} alt={title} />
-			<p>{title}</p>
+			<p class="article-title">{title}</p>
 		</div>
 	{/each}
 </div>
@@ -31,21 +29,28 @@
 		gap: 4px;
 		margin: 28px 0;
 		background: rgb(238, 238, 238);
+	}
 
-		.article-preview {
-			width: 28vw;
-			height: 24vw;
-			background: rgb(26, 26, 26);
-			color: white;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-
-			img {
-				max-width: 100%;
-				max-height: 100%;
-			}
+	.article-preview {
+		width: 28vw;
+		height: 24vw;
+		background: rgb(26, 26, 26);
+		color: white;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		&:hover {
+			background: lighten(rgb(26, 26, 26), 10%);
 		}
+	}
+
+	.article-title {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
 	}
 </style>
