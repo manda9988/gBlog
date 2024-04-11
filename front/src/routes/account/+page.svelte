@@ -18,10 +18,6 @@
 		},
 		{ id: 3, author: 'Jane Doe', title: 'Jardinage 101', category: 'Jardinage', date: '2024-01-03' }
 	];
-
-	function deleteArticle(articleId) {
-		articles = articles.filter((article) => article.id !== articleId);
-	}
 </script>
 
 <section class="account-section">
@@ -38,8 +34,8 @@
 			<div class="grid-item">{article.category}</div>
 			<div class="grid-item">{article.date}</div>
 			<div class="grid-item">
-				<button on:click={() => deleteArticle(article.id)}>Supprimer</button>
-				<button>Modifier</button>
+				<button class="delete-button">Supprimer</button>
+				<button class="edit-button">Modifier</button>
 			</div>
 		{/each}
 	</div>
@@ -57,30 +53,50 @@
 			gap: 0.5rem;
 			width: 100%;
 			max-width: 800px;
+			margin: 0 auto;
 			.grid-header {
-				font-weight: bold;
-				padding: 0.5rem;
+				font-weight: 700;
+				text-align: center;
 			}
 			.grid-item {
 				padding: 0.5rem;
 				border: 1px solid #ccc;
 				border-radius: 4px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				flex-direction: column;
+				font-weight: 200;
 			}
+
 			button {
-				background-color: #e3342f;
 				color: white;
 				border: none;
 				border-radius: 4px;
 				padding: 0.25rem 0.5rem;
 				cursor: pointer;
-				margin-top: 0.5rem;
+				margin: 0.15rem;
+				width: 85%;
+			}
+			.delete-button {
+				background: #e40800;
 				&:hover {
-					background-color: darken(#e3342f, 10%);
+					background-color: darken(#e40800, 10%);
+				}
+			}
+			.edit-button {
+				background: #007b10;
+				&:hover {
+					background-color: lighten(#007b10, 10%);
 				}
 			}
 		}
 		h2 {
-			margin-bottom: 1rem;
+			margin-bottom: 2rem;
+			font-weight: 800;
+			font-size: 1.7rem;
+			text-align: center;
 		}
 	}
 </style>
