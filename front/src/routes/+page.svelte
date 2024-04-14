@@ -1,16 +1,15 @@
 <!-- src/routes/+page.svelte -->
 <script>
-	const articles = [
-		{ title: 'Article 1' },
-		{ title: 'Article 2' },
-		{ title: 'Article 3' },
-		{ title: 'Article 4' },
-		{ title: 'Article 5' },
-		{ title: 'Article 6' },
-		{ title: 'Article 7' },
-		{ title: 'Article 8' },
-		{ title: 'Article 9' }
-	];
+	import { onMount } from 'svelte';
+
+	let articles = [];
+
+	onMount(async () => {
+		const response = await fetch('http://localhost:3000/articles');
+		if (response.ok) {
+			articles = await response.json();
+		}
+	});
 </script>
 
 <div class="gallery">

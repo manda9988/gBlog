@@ -1,16 +1,18 @@
+// back / index.js;
+
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = 3000;
-const pool = require("./db"); // Importez la connexion à la base de données
+const pool = require("./db");
 
-app.use(express.json()); // Pour parser les corps de requêtes en JSON
+app.use(cors());
+app.use(express.json());
 
-// Route de test pour vérifier que le serveur fonctionne
 app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
-// Nouvelle route pour récupérer tous les articles
 app.get("/articles", async (req, res) => {
   try {
     const allArticles = await pool.query("SELECT * FROM articles");
