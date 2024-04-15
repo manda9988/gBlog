@@ -1,7 +1,7 @@
 <!-- src/routes/login/+page.svelte -->
 
 <script>
-	// Logique de connexion ici
+	import '../../styles/login.scss';
 </script>
 
 <section>
@@ -17,58 +17,3 @@
 		<button type="submit">Login</button>
 	</form>
 </section>
-
-<style lang="scss">
-	section {
-		display: flex;
-		justify-content: center;
-		align-items: flex-start;
-		width: 100%;
-		padding-top: 60px;
-
-		form {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			padding: 20px;
-			background: rgb(243, 243, 243);
-			border-radius: 10px;
-			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-			width: 100%;
-			max-width: 380px;
-
-			div {
-				margin-bottom: 1rem;
-				width: 100%;
-			}
-
-			label {
-				display: block;
-				margin-bottom: 0.5rem;
-			}
-
-			input {
-				width: calc(100% - 1rem);
-				padding: 0.5rem;
-				border: 1px solid #ccc;
-				border-radius: 4px;
-				box-sizing: border-box;
-			}
-
-			button {
-				padding: 0.6rem 1.2rem;
-				background-color: rgb(42, 42, 42);
-				color: rgb(238, 238, 238);
-				border: none;
-				border-radius: 4px;
-				cursor: pointer;
-				font-weight: bold;
-				text-transform: uppercase;
-
-				&:hover {
-					background-color: darken(rgb(42, 42, 42), 10%);
-				}
-			}
-		}
-	}
-</style>
