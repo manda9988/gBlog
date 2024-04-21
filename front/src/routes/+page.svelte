@@ -1,2 +1,23 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<!-- src/routes/+page.svelte -->
+<script>
+	import '../styles/home.scss';
+
+	import { onMount } from 'svelte';
+
+	let articles = [];
+
+	onMount(async () => {
+		const response = await fetch('http://localhost:3000/articles');
+		if (response.ok) {
+			articles = await response.json();
+		}
+	});
+</script>
+
+<div class="gallery">
+	{#each articles as { title }}
+		<div class="article-preview">
+			<p class="article-title">{title}</p>
+		</div>
+	{/each}
+</div>
