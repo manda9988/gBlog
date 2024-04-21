@@ -1,13 +1,8 @@
-// See https://kit.svelte.dev/docs/types#app
-// for information about these interfaces
-declare global {
-	namespace App {
-		// interface Error {}
-		// interface Locals {}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
-	}
+// src/app.d.ts
+export interface Article {
+	id: number;
+	title: string;
+	content: string;
+	category_id: number;
+	published_at: Date;
 }
-
-export {};
