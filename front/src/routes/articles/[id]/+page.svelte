@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import type { Article } from '../../../app.d.ts';
+	import '../../../styles/article-detail.scss';
 
 	let article: Article | undefined;
 
@@ -20,8 +21,17 @@
 
 {#if article}
 	<article>
+		<div class="article-header">
+			<p class="article-date">
+				{new Date(article.published_at).toLocaleDateString(undefined, {
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric'
+				})}
+			</p>
+		</div>
 		<h1>{article.title}</h1>
-		<div>{article.content}</div>
+		<p>{article.content}</p>
 	</article>
 {:else}
 	<p>Loading article or article not found...</p>
