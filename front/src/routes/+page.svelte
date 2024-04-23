@@ -17,8 +17,12 @@
 
 <div class="gallery">
 	{#each articles as article}
-		<div class="article-preview">
+		<a
+			href={`/articles/${article.id}`}
+			class="article-preview"
+			aria-label={`Read more about ${article.title}`}
+		>
 			<p class="article-title">{article.title}</p>
-		</div>
+		</a>
 	{/each}
 </div>

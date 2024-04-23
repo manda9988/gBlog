@@ -18,4 +18,20 @@ app.get("/articles", async (req, res) => {
   }
 });
 
+app.get("/articles/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const article = await pool.query("SELECT * FROM articles WHERE id = $1", [
+      id,
+    ]);
+    if (article.rows.length > 0) {
+      res.json(article.rows[0]);
+    } else {
+      res.status(404).send("Article not found");
+    }
+  } catch (err) {
+    res.status(500).send("Server error");
+  }
+});
+
 app.listen(port);
