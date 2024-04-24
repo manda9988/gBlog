@@ -22,9 +22,12 @@ app.get("/articles", async (req, res) => {
 app.get("/articles/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const article = await pool.query("SELECT * FROM articles WHERE id = $1", [
-      id,
-    ]);
+    const articleQuery = `
+      SELECT a.id, a.title, a.content, a.category_id, a.published_at, c.name as category_name
+      FROM articles a
+      JOIN categories c ON a.category_id = c.id
+      WHERE a.id = $1`;
+    const article = await pool.query(articleQuery, [id]);
     if (article.rows.length > 0) {
       res.json(article.rows[0]);
     } else {
