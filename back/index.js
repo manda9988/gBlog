@@ -14,6 +14,7 @@ app.get("/articles", async (req, res) => {
     const allArticles = await pool.query("SELECT * FROM articles");
     res.json(allArticles.rows);
   } catch (err) {
+    console.error("Error fetching all articles:", err);
     res.status(500).send("Server error");
   }
 });
@@ -30,6 +31,7 @@ app.get("/articles/:id", async (req, res) => {
       res.status(404).send("Article not found");
     }
   } catch (err) {
+    console.error("Error fetching article by ID:", err);
     res.status(500).send("Server error");
   }
 });

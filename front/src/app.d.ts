@@ -4,5 +4,5 @@ export interface Article {
 	title: string;
 	content: string;
 	category_id: number;
-	published_at: Date;
+	published_at: string;
 }

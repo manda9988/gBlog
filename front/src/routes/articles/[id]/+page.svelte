@@ -17,18 +17,18 @@
 			console.error('Failed to fetch article:', await response.text());
 		}
 	});
+
+	function formatDate(dateString: string): string {
+		const date = new Date(dateString);
+		const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+		return `Publié le: ${date.toLocaleDateString('fr-FR', options)}.`;
+	}
 </script>
 
 {#if article}
 	<article>
 		<div class="article-header">
-			<p class="article-date">
-				{new Date(article.published_at).toLocaleDateString(undefined, {
-					year: 'numeric',
-					month: 'long',
-					day: 'numeric'
-				})}
-			</p>
+			<p class="article-date">{formatDate(article.published_at)}</p>
 		</div>
 		<h1>{article.title}</h1>
 		<p>{article.content}</p>
