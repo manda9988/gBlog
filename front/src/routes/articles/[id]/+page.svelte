@@ -13,7 +13,6 @@
 		const response = await fetch(`http://localhost:3000/articles/${id}`);
 		if (response.ok) {
 			article = await response.json();
-			// Supposons que vous avez ajouté la récupération de la catégorie ici
 		} else {
 			console.error('Failed to fetch article:', await response.text());
 		}
@@ -31,7 +30,6 @@
 		<div class="article-header">
 			<p class="article-date">{formatDate(article.published_at)}</p>
 			<p class="article-category">Catégorie: {article.category_name}</p>
-			<!-- Afficher la catégorie -->
 		</div>
 		<h1>{article.title}</h1>
 		<p>{article.content}</p>
