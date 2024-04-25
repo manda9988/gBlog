@@ -17,13 +17,15 @@
 	});
 
 	async function deleteArticle(articleId: number) {
-		const response = await fetch(`http://localhost:3000/articles/${articleId}`, {
-			method: 'DELETE'
-		});
-		if (response.ok) {
-			articles = articles.filter((article) => article.id !== articleId);
-		} else {
-			console.error('Failed to delete article:', await response.text());
+		if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+			const response = await fetch(`http://localhost:3000/articles/${articleId}`, {
+				method: 'DELETE'
+			});
+			if (response.ok) {
+				articles = articles.filter((article) => article.id !== articleId);
+			} else {
+				console.error('Failed to delete article:', await response.text());
+			}
 		}
 	}
 </script>
