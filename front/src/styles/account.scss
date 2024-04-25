@@ -1,3 +1,4 @@
+/* account.scss */
 .account-section {
 	display: flex;
 	flex-direction: column;
@@ -5,7 +6,7 @@
 	width: 100%;
 	.articles-grid {
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 		gap: 0.5rem;
 		width: 100%;
 		max-width: 800px;
@@ -42,16 +43,10 @@
 			}
 		}
 		.edit-button {
-			background: #007b10;
+			background: #008f13;
 			&:hover {
 				background-color: lighten(#007b10, 10%);
 			}
 		}
-	}
-	h2 {
-		margin-bottom: 2rem;
-		font-weight: 800;
-		font-size: 1.7rem;
-		text-align: center;
 	}
 }

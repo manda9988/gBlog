@@ -11,7 +11,11 @@ app.use(express.json());
 
 app.get("/articles", async (req, res) => {
   try {
-    const allArticles = await pool.query("SELECT * FROM articles");
+    const allArticles = await pool.query(`
+      SELECT articles.*, categories.name AS category_name
+      FROM articles
+      JOIN categories ON articles.category_id = categories.id
+    `);
     res.json(allArticles.rows);
   } catch (err) {
     console.error("Error fetching all articles:", err);
