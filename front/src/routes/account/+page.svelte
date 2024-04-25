@@ -15,10 +15,20 @@
 			console.error('Failed to fetch articles:', await response.text());
 		}
 	});
+
+	async function deleteArticle(articleId: number) {
+		const response = await fetch(`http://localhost:3000/articles/${articleId}`, {
+			method: 'DELETE'
+		});
+		if (response.ok) {
+			articles = articles.filter((article) => article.id !== articleId);
+		} else {
+			console.error('Failed to delete article:', await response.text());
+		}
+	}
 </script>
 
 <section class="account-section">
-	<h2>Articles publiés</h2>
 	<div class="articles-grid">
 		<div class="grid-header">Titre</div>
 		<div class="grid-header">Catégorie</div>
@@ -29,8 +39,8 @@
 			<div class="grid-item">{article.category_name}</div>
 			<div class="grid-item">{new Date(article.published_at).toLocaleDateString()}</div>
 			<div class="grid-item">
-				<button class="delete-button">Supprimer</button>
-				<button class="edit-button">Modifier</button>
+				<button class="delete-button" on:click={() => deleteArticle(article.id)}>Supprimer</button>
+				<button class="edit-button" disabled>Modifier</button>
 			</div>
 		{/each}
 	</div>

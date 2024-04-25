@@ -46,6 +46,7 @@
 			background: #008f13;
 			&:hover {
 				background-color: lighten(#007b10, 10%);
+				cursor: not-allowed;
 			}
 		}
 	}

@@ -9,6 +9,7 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json());
 
+// Route pour récupérer tous les articles avec leurs catégories
 app.get("/articles", async (req, res) => {
   try {
     const allArticles = await pool.query(`
@@ -23,6 +24,7 @@ app.get("/articles", async (req, res) => {
   }
 });
 
+// Route pour récupérer un article spécifique par son ID avec sa catégorie
 app.get("/articles/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -39,6 +41,23 @@ app.get("/articles/:id", async (req, res) => {
     }
   } catch (err) {
     console.error("Error fetching article by ID:", err);
+    res.status(500).send("Server error");
+  }
+});
+
+// Nouvelle route DELETE pour supprimer un article
+app.delete("/articles/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteQuery = 'DELETE FROM articles WHERE id = $1';
+    const result = await pool.query(deleteQuery, [id]);
+    if (result.rowCount > 0) {
+        res.json({ success: true, message: 'Article deleted successfully.' });
+    } else {
+        res.status(404).send({ success: false, message: 'Article not found.' });
+    }
+  } catch (err) {
+    console.error("Error deleting article:", err);
     res.status(500).send("Server error");
   }
 });
