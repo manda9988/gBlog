@@ -1,14 +1,45 @@
 <!-- src/routes/publish/+page.svelte -->
 
-<script>
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import type { Category, ArticleData } from '../../app.d.ts';
 	import '../../styles/publish.scss';
 
-	// Ici, tu ajouteras la logique pour gérer la soumission du formulaire
-	function handleSubmit(event) {
-		// Prevent the form from actually submitting
-		event.preventDefault();
+	let categories: Category[] = [];
 
-		// Ici, tu traiteras les données du formulaire
+	onMount(async () => {
+		const response = await fetch('http://localhost:3000/categories');
+		if (response.ok) {
+			categories = (await response.json()) as Category[];
+		} else {
+			console.error('Failed to load categories:', await response.text());
+		}
+	});
+
+	function handleSubmit(event: Event) {
+		event.preventDefault();
+		const title = (document.getElementById('title') as HTMLInputElement).value;
+		const categoryId = (document.getElementById('category') as HTMLSelectElement).value;
+		const content = (document.getElementById('content') as HTMLTextAreaElement).value;
+		const formData: ArticleData = {
+			title,
+			category_id: Number(categoryId), // Ensure categoryId is converted to number
+			content
+		};
+		submitArticle(formData);
+	}
+
+	async function submitArticle(articleData: ArticleData) {
+		const response = await fetch('http://localhost:3000/articles', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(articleData)
+		});
+		if (!response.ok) {
+			console.error('Failed to publish article:', await response.text());
+		}
 	}
 </script>
 
@@ -22,9 +53,9 @@
 			<label for="category">Catégorie</label>
 			<select id="category">
 				<option value="">--Choisir une catégorie--</option>
-				<option value="categorie1">Catégorie 1</option>
-				<option value="categorie2">Catégorie 2</option>
-				// Ajouter plus de catégories ici
+				{#each categories as category}
+					<option value={category.id}>{category.name}</option>
+				{/each}
 			</select>
 		</div>
 		<div class="form-group">

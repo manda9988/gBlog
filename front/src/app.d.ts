@@ -7,3 +7,14 @@ export interface Article {
 	category_name?: string;
 	published_at: string;
 }
+
+export interface Category {
+	id: number;
+	name: string;
+}
+
+export interface ArticleData {
+	title: string;
+	category_id: number;
+	content: string;
+}
