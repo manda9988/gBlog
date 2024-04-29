@@ -73,4 +73,24 @@ app.delete("/articles/:id", async (req, res) => {
   }
 });
 
+// Route pour ajouter un nouvel article
+app.post("/articles", async (req, res) => {
+  try {
+    const { title, category_id, content } = req.body;
+    const insertQuery = `
+      INSERT INTO articles (title, category_id, content, published_at)
+      VALUES ($1, $2, $3, NOW())
+      RETURNING *`;
+    const newArticle = await pool.query(insertQuery, [
+      title,
+      category_id,
+      content,
+    ]);
+    res.json(newArticle.rows[0]);
+  } catch (err) {
+    console.error("Error creating new article:", err);
+    res.status(500).send("Server error");
+  }
+});
+
 app.listen(port);

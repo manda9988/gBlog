@@ -18,12 +18,16 @@
 
 	function handleSubmit(event: Event) {
 		event.preventDefault();
+		if (!confirm('Êtes-vous sûr de vouloir publier cet article?')) {
+			return;
+		}
+
 		const title = (document.getElementById('title') as HTMLInputElement).value;
 		const categoryId = (document.getElementById('category') as HTMLSelectElement).value;
 		const content = (document.getElementById('content') as HTMLTextAreaElement).value;
 		const formData: ArticleData = {
 			title,
-			category_id: Number(categoryId), // Ensure categoryId is converted to number
+			category_id: Number(categoryId),
 			content
 		};
 		submitArticle(formData);
@@ -37,7 +41,10 @@
 			},
 			body: JSON.stringify(articleData)
 		});
-		if (!response.ok) {
+		if (response.ok) {
+			alert("L'article a été publié avec succès!");
+			window.location.href = '/'; // Redirection vers la page d'accueil
+		} else {
 			console.error('Failed to publish article:', await response.text());
 		}
 	}
