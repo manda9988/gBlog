@@ -9,17 +9,35 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json());
 
-// Route pour récupérer tous les articles avec leurs catégories
+// Route pour récupérer tous les articles avec leurs catégories, les plus récents en premier
 app.get("/articles", async (req, res) => {
   try {
     const allArticles = await pool.query(`
       SELECT articles.*, categories.name AS category_name
       FROM articles
       JOIN categories ON articles.category_id = categories.id
+      ORDER BY articles.published_at DESC
     `);
     res.json(allArticles.rows);
   } catch (err) {
     console.error("Error fetching all articles:", err);
+    res.status(500).send("Server error");
+  }
+});
+
+// Route pour récupérer les 6 derniers articles
+app.get("/articles/latest", async (req, res) => {
+  try {
+    const latestArticles = await pool.query(`
+      SELECT articles.*, categories.name AS category_name
+      FROM articles
+      JOIN categories ON articles.category_id = categories.id
+      ORDER BY articles.published_at DESC
+      LIMIT 6
+    `);
+    res.json(latestArticles.rows);
+  } catch (err) {
+    console.error("Error fetching latest articles:", err);
     res.status(500).send("Server error");
   }
 });

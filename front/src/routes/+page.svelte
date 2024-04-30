@@ -8,7 +8,8 @@
 	let articles: Article[] = [];
 
 	onMount(async () => {
-		const response = await fetch('http://localhost:3000/articles');
+		const response = await fetch('http://localhost:3000/articles/latest');
+
 		if (response.ok) {
 			articles = await response.json();
 		}
