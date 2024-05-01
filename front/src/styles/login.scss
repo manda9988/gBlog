@@ -13,8 +13,8 @@ section {
 		background: rgb(243, 243, 243);
 		border-radius: 10px;
 		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-		width: 100%;
-		max-width: 380px;
+		width: 80%;
+		max-width: 440px;
 
 		div {
 			margin-bottom: 1rem;
@@ -47,6 +47,12 @@ section {
 			&:hover {
 				background-color: darken(rgb(42, 42, 42), 10%);
 			}
+		}
+	}
+
+	@media (max-width: 600px) {
+		form {
+			max-width: 320px;
 		}
 	}
 }

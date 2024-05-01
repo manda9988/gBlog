@@ -10,6 +10,7 @@
 		color: rgb(230, 230, 230);
 		text-align: center;
 		padding: 1rem 0;
-		font-size: 0.65rem;
+		font-size: 0.75rem;
+		font-weight: 300;
 	}
 </style>
