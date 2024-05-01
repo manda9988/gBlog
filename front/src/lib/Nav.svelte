@@ -18,7 +18,7 @@
 
 <style lang="scss">
 	nav {
-		background-color: rgb(42, 42, 42);
+		background: rgb(37, 37, 37);
 		padding: 0.6rem 0;
 		text-align: center;
 
