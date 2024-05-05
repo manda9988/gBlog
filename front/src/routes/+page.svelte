@@ -7,6 +7,36 @@
 
 	let articles: Article[] = [];
 
+	const baseUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+
+	onMount(async () => {
+		const response = await fetch(`${baseUrl}/articles/latest`);
+
+		if (response.ok) {
+			articles = await response.json();
+		}
+	});
+</script>
+
+<div class="gallery">
+	{#each articles as article}
+		<a
+			href={`/articles/${article.id}`}
+			class="article-preview"
+			aria-label={`En savoir plus sur ${article.title}`}
+		>
+			<p class="article-title">{article.title}</p>
+		</a>
+	{/each}
+</div>
+
+<!-- <script lang="ts">
+	import type { Article } from '../app.d.ts';
+	import '../styles/home.scss';
+	import { onMount } from 'svelte';
+
+	let articles: Article[] = [];
+
 	onMount(async () => {
 		const response = await fetch('http://localhost:3000/articles/latest');
 
@@ -26,4 +56,4 @@
 			<p class="article-title">{article.title}</p>
 		</a>
 	{/each}
-</div>
+</div> -->
