@@ -6,7 +6,13 @@ const app = express();
 const port = 3000;
 const pool = require("./db");
 
-app.use(cors());
+// Configuration CORS pour autoriser des domaines spécifiques et supporter les anciens navigateurs
+const corsOptions = {
+  origin: ["https://gblog-bice.vercel.app"],
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Route pour récupérer tous les articles avec leurs catégories, les plus récents en premier
