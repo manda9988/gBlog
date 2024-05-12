@@ -8,7 +8,7 @@ const pool = require("./db");
 
 // Configuration CORS pour autoriser des domaines spécifiques et supporter les anciens navigateurs
 const corsOptions = {
-  origin: ["https://gblog-bice.vercel.app"],
+  origin: ["https://gblog-bice.vercel.app", "http://localhost:5173"],
   optionsSuccessStatus: 200,
 };
 
