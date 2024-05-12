@@ -7,7 +7,7 @@
 
 	let articles: Article[] = [];
 
-	const baseUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 	onMount(async () => {
 		const response = await fetch(`${baseUrl}/articles/latest`);

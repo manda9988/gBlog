@@ -3,7 +3,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const pool = require("./db");
 
 // Configuration CORS pour autoriser des domaines spécifiques et supporter les anciens navigateurs
