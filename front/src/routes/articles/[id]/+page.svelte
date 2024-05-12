@@ -8,9 +8,12 @@
 
 	let article: Article | undefined;
 
+	// Nouvelle URL dynamique basée sur les variables d'environnement
+	const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
 	onMount(async () => {
 		const id = $page.params.id;
-		const response = await fetch(`http://localhost:3000/articles/${id}`);
+		const response = await fetch(`${baseUrl}/articles/${id}`);
 		if (response.ok) {
 			article = await response.json();
 		} else {
