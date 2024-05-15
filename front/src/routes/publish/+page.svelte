@@ -7,8 +7,12 @@
 
 	let categories: Category[] = [];
 
+	// Ajout de la baseUrl pour utiliser les variables d'environnement
+	const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
 	onMount(async () => {
-		const response = await fetch('http://localhost:3000/categories');
+		// Utilisation de baseUrl dans l'appel fetch
+		const response = await fetch(`${baseUrl}/categories`);
 		if (response.ok) {
 			categories = (await response.json()) as Category[];
 		} else {
@@ -34,7 +38,8 @@
 	}
 
 	async function submitArticle(articleData: ArticleData) {
-		const response = await fetch('http://localhost:3000/articles', {
+		// Utilisation de baseUrl dans l'appel fetch
+		const response = await fetch(`${baseUrl}/articles`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
