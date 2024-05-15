@@ -7,8 +7,11 @@
 
 	let articles: Article[] = [];
 
+	// Nouvelle URL dynamique basée sur les variables d'environnement
+	const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
 	onMount(async () => {
-		const response = await fetch('http://localhost:3000/articles');
+		const response = await fetch(`${baseUrl}/articles`);
 		if (response.ok) {
 			articles = await response.json();
 		}
