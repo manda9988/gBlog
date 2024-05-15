@@ -7,8 +7,12 @@
 
 	let articles: Article[] = [];
 
+	// Ajout de la baseUrl pour utiliser les variables d'environnement
+	const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
 	onMount(async () => {
-		const response = await fetch(`http://localhost:3000/articles`);
+		// Utilisation de baseUrl dans l'appel fetch
+		const response = await fetch(`${baseUrl}/articles`);
 		if (response.ok) {
 			articles = await response.json();
 		} else {
@@ -18,7 +22,8 @@
 
 	async function deleteArticle(articleId: number) {
 		if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
-			const response = await fetch(`http://localhost:3000/articles/${articleId}`, {
+			// Utilisation de baseUrl dans l'appel fetch
+			const response = await fetch(`${baseUrl}/articles/${articleId}`, {
 				method: 'DELETE'
 			});
 			if (response.ok) {
