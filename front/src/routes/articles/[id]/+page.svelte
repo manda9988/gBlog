@@ -24,14 +24,14 @@
 	function formatDate(dateString: string): string {
 		const date = new Date(dateString);
 		const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-		return `Publié le: ${date.toLocaleDateString('fr-FR', options)}.`;
+		return `${date.toLocaleDateString('fr-FR', options)}`;
 	}
 </script>
 
 {#if article}
 	<article>
 		<div class="article-header">
-			<p class="article-date">{formatDate(article.published_at)}</p>
+			<p class="article-date">Publié le {formatDate(article.published_at)}</p>
 			<p class="article-category">Catégorie: {article.category_name}</p>
 		</div>
 		<h1>{article.title}</h1>
