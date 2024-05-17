@@ -26,8 +26,9 @@
 			color: rgb(238, 238, 238);
 			margin: 0 1rem;
 			text-decoration: none;
-			font-size: 0.95rem;
-			font-weight: 500;
+			font-size: 0.8rem;
+			font-weight: 550;
+			text-transform: uppercase;
 
 			&:hover {
 				color: grey;
@@ -36,6 +37,12 @@
 
 		.active {
 			color: rgb(154, 154, 154);
+		}
+		@media (max-width: 600px) {
+			a {
+				margin: 0 0.85rem;
+				font-size: 0.7rem;
+			}
 		}
 	}
 </style>
