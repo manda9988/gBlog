@@ -33,15 +33,9 @@
 			}
 		}
 	}
-	function logout() {
-		// Logique de déconnexion ici
-		console.log('Déconnexion');
-	}
 </script>
 
 <section class="account-section">
-	<button class="logout-button" on:click={logout}>Déconnexion</button>
-
 	<div class="articles-grid">
 		<div class="grid-header">Titre</div>
 		<div class="grid-header">Catégorie</div>

@@ -4,20 +4,6 @@
 	flex-direction: column;
 	padding: 2rem;
 	width: 100%;
-	.logout-button {
-		align-self: center;
-		margin-bottom: 2rem;
-		padding: 8px 18px;
-		background: #1787ff;
-		border: none;
-		color: rgb(235, 235, 235);
-		border-radius: 8px;
-		font-weight: 900;
-		cursor: pointer;
-		&:hover {
-			background-color: lighten(#1f8bff, 8%);
-		}
-	}
 
 	.articles-grid {
 		display: grid;
