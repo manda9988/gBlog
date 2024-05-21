@@ -1,3 +1,5 @@
 import { writable } from 'svelte/store';
 
-export const isLoggedIn = writable(!!localStorage.getItem('token'));
+const isBrowser = typeof window !== 'undefined';
+
+export const isLoggedIn = writable(isBrowser && !!localStorage.getItem('token'));

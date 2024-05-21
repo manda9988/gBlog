@@ -3,16 +3,23 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { isLoggedIn } from '../../lib/authStore'; // Importer la store
 	import '../../styles/login.scss';
 
 	let email = '';
 	let password = '';
-	let isLoggedIn = false;
+	const isBrowser = typeof window !== 'undefined';
 
-	onMount(() => {
-		const token = localStorage.getItem('token');
-		isLoggedIn = !!token; // Mettre à jour l'état de connexion
-	});
+	if (isBrowser) {
+		onMount(() => {
+			isLoggedIn.subscribe((value) => {
+				// Ne rediriger vers /account que si on n'est pas sur la page de login
+				if (value && window.location.pathname !== '/login') {
+					goto('/account');
+				}
+			});
+		});
+	}
 
 	// Fonction de login pour envoyer les informations d'identification et stocker le token JWT
 	async function login(event: Event) {
@@ -29,10 +36,11 @@
 		if (response.ok) {
 			const data = await response.json();
 			console.log('Login successful, token received');
-			localStorage.setItem('token', data.token); // Stocker le token dans localStorage
+			if (isBrowser) {
+				localStorage.setItem('token', data.token); // Stocker le token dans localStorage
+				isLoggedIn.set(true); // Mettre à jour l'état de connexion dans la store
+			}
 			alert('Login successful'); // Message d'alerte pour connexion réussie
-			isLoggedIn = true; // Mettre à jour l'état de connexion
-			goto('/account'); // Rediriger vers la page de compte après une connexion réussie
 		} else {
 			console.log('Login failed');
 			alert('Login failed');
@@ -42,8 +50,10 @@
 	function logout() {
 		// Demande de confirmation pour la déconnexion
 		if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-			localStorage.removeItem('token'); // Supprimer le token du localStorage
-			isLoggedIn = false; // Mettre à jour l'état de connexion
+			if (isBrowser) {
+				localStorage.removeItem('token'); // Supprimer le token du localStorage
+				isLoggedIn.set(false); // Mettre à jour l'état de connexion dans la store
+			}
 			goto('/'); // Rediriger vers la page d'accueil
 			console.log('Déconnexion');
 		}
@@ -51,7 +61,7 @@
 </script>
 
 <section>
-	{#if !isLoggedIn}
+	{#if !$isLoggedIn}
 		<form on:submit={login} autocomplete="off">
 			<div>
 				<label for="email">Email</label>
