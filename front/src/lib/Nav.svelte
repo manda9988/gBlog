@@ -28,7 +28,7 @@
 	<a href="/account" class:active={$currentPath === '/account'}>Account</a>
 	<a href="/login" class:active={$currentPath === '/login'}>
 		{#if $isLoggedIn}
-			Hi Admin 😊
+			Hi Admin✌️
 		{/if}
 		{#if !$isLoggedIn}
 			Login
