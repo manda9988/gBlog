@@ -53,15 +53,15 @@ section {
 	.logout-button {
 		align-self: center;
 		margin-bottom: 2rem;
-		padding: 8px 18px;
-		background: #1787ff;
+		padding: 16px 18px;
+		background: #4c4c4c;
 		border: none;
 		color: rgb(235, 235, 235);
 		border-radius: 8px;
 		font-weight: 900;
 		cursor: pointer;
 		&:hover {
-			background-color: lighten(#1f8bff, 8%);
+			background-color: lighten(#131313, 8%);
 		}
 	}
 

@@ -1,8 +1,16 @@
 <!-- src/lib/Nav.svelte -->
 
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { derived } from 'svelte/store';
+
+	let isLoggedIn = false;
+
+	onMount(() => {
+		const token = localStorage.getItem('token');
+		isLoggedIn = !!token;
+	});
 
 	// Créons une store dérivée pour suivre le chemin de la page courante
 	const currentPath = derived(page, ($page) => $page.url.pathname);
@@ -13,7 +21,9 @@
 	<a href="/all" class:active={$currentPath === '/all'}>All</a>
 	<a href="/publish" class:active={$currentPath === '/publish'}>Publish</a>
 	<a href="/account" class:active={$currentPath === '/account'}>Account</a>
-	<a href="/login" class:active={$currentPath === '/login'}>Login</a>
+	<a href="/login" class:active={$currentPath === '/login'}
+		>{isLoggedIn ? 'Hi Admin 😊' : 'Login'}</a
+	>
 </nav>
 
 <style lang="scss">
