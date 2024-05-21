@@ -1,6 +1,6 @@
 <!-- src/lib/Title.svelte -->
 <script>
-	export let title = 'Blog';
+	export let title = 'B l o g ...';
 </script>
 
 <h1>{title}</h1>
@@ -15,7 +15,7 @@
 		margin: 0;
 		// text-transform: uppercase;
 		letter-spacing: -3.2px;
-		font-weight: 100;
+		font-weight: 900;
 		font-size: 2.5rem;
 		font-family: 'Orbitron', sans-serif;
 	}
