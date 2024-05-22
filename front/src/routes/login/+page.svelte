@@ -2,13 +2,12 @@
 
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { isLoggedIn } from '../../lib/authStore'; // Importer la store
+	import { isLoggedIn } from '../../lib/authStore';
 	import '../../styles/login.scss';
 
 	let email = '';
 	let password = '';
 
-	// Fonction de login pour envoyer les informations d'identification et stocker le token JWT
 	async function login(event: Event) {
 		event.preventDefault();
 		console.log(`Attempting login with email: ${email}`);
@@ -23,12 +22,10 @@
 		if (response.ok) {
 			const data = await response.json();
 			console.log('Login successful, token received');
-			if (typeof window !== 'undefined') {
-				localStorage.setItem('token', data.token); // Stocker le token dans localStorage
-				isLoggedIn.set(true); // Mettre à jour l'état de connexion dans la store
-				goto('/'); // Rediriger vers la page d'accueil après une connexion réussie
-			}
-			alert('Login successful'); // Message d'alerte pour connexion réussie
+			localStorage.setItem('token', data.token);
+			isLoggedIn.set(true);
+			goto('/'); // Redirect to home after successful login
+			alert('Login successful');
 		} else {
 			console.log('Login failed');
 			alert('Login failed');
@@ -36,13 +33,10 @@
 	}
 
 	function logout() {
-		// Demande de confirmation pour la déconnexion
 		if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-			if (typeof window !== 'undefined') {
-				localStorage.removeItem('token'); // Supprimer le token du localStorage
-				isLoggedIn.set(false); // Mettre à jour l'état de connexion dans la store
-			}
-			goto('/'); // Rediriger vers la page d'accueil
+			localStorage.removeItem('token');
+			isLoggedIn.set(false);
+			goto('/');
 			console.log('Déconnexion');
 			alert('Disconnection');
 		}
