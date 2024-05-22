@@ -70,7 +70,7 @@ const authenticateJWT = (req, res, next) => {
 app.use("/account", authenticateJWT);
 app.use("/publish", authenticateJWT);
 
-// Existing routes...
+
 
 // Route pour récupérer tous les articles avec leurs catégories, les plus récents en premier
 app.get("/articles", async (req, res) => {
