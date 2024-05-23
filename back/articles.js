@@ -2,11 +2,10 @@
 
 const express = require("express");
 const pool = require("./db");
-
 const router = express.Router();
 
 // Route pour récupérer tous les articles avec leurs catégories, les plus récents en premier
-router.get("/articles", async (req, res) => {
+router.get("/articles", async (_req, res) => {
   try {
     const allArticles = await pool.query(`
       SELECT articles.*, categories.name AS category_name

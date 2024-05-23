@@ -2,7 +2,7 @@
 
 const express = require("express");
 const cors = require("cors");
-const { router: authRouter, authenticateJWT } = require("./auth");
+const authRouter = require("./auth");
 const articlesRouter = require("./articles");
 require("dotenv").config();
 
@@ -20,10 +20,6 @@ app.use(express.json());
 
 app.use(authRouter); // Utiliser le router d'authentification
 app.use(articlesRouter); // Utiliser le router des articles
-
-// Utiliser le middleware pour protéger les routes
-app.use("/account", authenticateJWT);
-app.use("/publish", authenticateJWT);
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

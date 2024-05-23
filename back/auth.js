@@ -34,24 +34,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Middleware pour vérifier le token JWT
-const authenticateJWT = (req, res, next) => {
-  const token = req.headers.authorization;
-  console.log(`Authenticating token: ${token}`);
-  if (token) {
-    jwt.verify(token, SECRET_KEY, (err, user) => {
-      if (err) {
-        console.log(`Token verification failed: ${err.message}`);
-        return res.sendStatus(403);
-      }
-      console.log(`Token verified for user ID: ${user.userId}`);
-      req.user = user;
-      next();
-    });
-  } else {
-    console.log("No token provided");
-    res.sendStatus(401);
-  }
-};
-
-module.exports = { router, authenticateJWT };
+module.exports = router;
