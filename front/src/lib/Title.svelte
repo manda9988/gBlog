@@ -1,6 +1,6 @@
 <!-- src/lib/Title.svelte -->
 <script>
-	export let title = 'B l o g ...';
+	export let title = 'B l o g _';
 </script>
 
 <h1>{title}</h1>
