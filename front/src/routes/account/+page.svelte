@@ -28,6 +28,7 @@
 			});
 			if (response.ok) {
 				articles = articles.filter((article) => article.id !== articleId);
+				alert('Article supprimé avec succès');
 			} else {
 				console.error('Failed to delete article:', await response.text());
 			}
