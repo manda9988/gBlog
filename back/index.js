@@ -2,9 +2,9 @@
 
 const express = require("express");
 const cors = require("cors");
-const authRouter = require("./auth");
-const articlesRouter = require("./articles");
-const categoriesRouter = require("./categories");
+const authRouter = require("./routes/auth");
+const articlesRouter = require("./routes/articles");
+const categoriesRouter = require("./routes/categories");
 const errorHandler = require("./middleware/errorHandler"); // Importer le middleware de gestion des erreurs
 
 require("dotenv").config();

@@ -1,7 +1,7 @@
 // back/articles.js
 
 const express = require("express");
-const pool = require("./db");
+const pool = require("../db");
 const router = express.Router();
 
 router.get("/articles", async (_req, res, next) => {
@@ -18,7 +18,7 @@ router.get("/articles", async (_req, res, next) => {
   }
 });
 
-router.get("/articles/latest", async (req, res, next) => {
+router.get("/articles/latest", async (_req, res, next) => {
   try {
     const latestArticles = await pool.query(`
       SELECT articles.*, categories.name AS category_name
@@ -29,7 +29,7 @@ router.get("/articles/latest", async (req, res, next) => {
     `);
     res.json(latestArticles.rows);
   } catch (err) {
-    next(err); // Passer l'erreur au middleware de gestion des erreurs
+    next(err); 
   }
 });
 
@@ -48,7 +48,7 @@ router.get("/articles/:id", async (req, res, next) => {
       res.status(404).send("Article not found");
     }
   } catch (err) {
-    next(err); // Passer l'erreur au middleware de gestion des erreurs
+    next(err); 
   }
 });
 
@@ -63,7 +63,7 @@ router.delete("/articles/:id", async (req, res, next) => {
       res.status(404).send({ success: false, message: "Article not found." });
     }
   } catch (err) {
-    next(err); // Passer l'erreur au middleware de gestion des erreurs
+    next(err); 
   }
 });
 
@@ -81,7 +81,7 @@ router.post("/articles", async (req, res, next) => {
     ]);
     res.json(newArticle.rows[0]);
   } catch (err) {
-    next(err); // Passer l'erreur au middleware de gestion des erreurs
+    next(err); 
   }
 });
 

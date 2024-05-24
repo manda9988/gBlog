@@ -1,10 +1,10 @@
 // back/categories.js
 
 const express = require("express");
-const pool = require("./db");
+const pool = require("../db");
 const router = express.Router();
 
-router.get("/categories", async (req, res, next) => {
+router.get("/categories", async (_req, res, next) => {
   try {
     const allCategories = await pool.query("SELECT * FROM categories");
     res.json(allCategories.rows);
