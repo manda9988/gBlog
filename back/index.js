@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const authRouter = require("./auth");
 const articlesRouter = require("./articles");
+const categoriesRouter = require("./categories");
+
 require("dotenv").config();
 
 const app = express();
@@ -20,6 +22,7 @@ app.use(express.json());
 
 app.use(authRouter); // Utiliser le router d'authentification
 app.use(articlesRouter); // Utiliser le router des articles
+app.use(categoriesRouter); // Utiliser le router des catégories
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

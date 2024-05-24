@@ -58,18 +58,7 @@ router.get("/articles/:id", async (req, res) => {
   }
 });
 
-// Route pour récupérer toutes les catégories
-router.get("/categories", async (req, res) => {
-  try {
-    const allCategories = await pool.query("SELECT * FROM categories");
-    res.json(allCategories.rows);
-  } catch (err) {
-    console.error("Error fetching categories:", err);
-    res.status(500).send("Server error");
-  }
-});
-
-// Nouvelle route DELETE pour supprimer un article
+// Route DELETE pour supprimer un article
 router.delete("/articles/:id", async (req, res) => {
   try {
     const { id } = req.params;
