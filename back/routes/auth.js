@@ -12,7 +12,6 @@ const SECRET_KEY = process.env.SECRET_KEY;
 router.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    console.log(`Login attempt with email: ${email}`);
     const user = await pool.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
@@ -25,14 +24,11 @@ router.post("/login", async (req, res, next) => {
         const token = jwt.sign({ userId: user.rows[0].id }, SECRET_KEY, {
           expiresIn: "1h",
         });
-        console.log(`Login successful for email: ${email}`);
         res.json({ token });
       } else {
-        console.log(`Invalid password for email: ${email}`);
         res.status(401).send("Invalid credentials");
       }
     } else {
-      console.log(`User not found for email: ${email}`);
       res.status(401).send("Invalid credentials");
     }
   } catch (err) {

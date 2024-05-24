@@ -10,7 +10,6 @@
 
 	async function login(event: Event) {
 		event.preventDefault();
-		console.log(`Attempting login with email: ${email}`);
 		const response = await fetch('http://localhost:3000/login', {
 			method: 'POST',
 			headers: {
@@ -21,13 +20,11 @@
 
 		if (response.ok) {
 			const data = await response.json();
-			console.log('Login successful, token received');
 			localStorage.setItem('token', data.token);
 			isLoggedIn.set(true);
 			goto('/'); // Redirect to home after successful login
 			alert('Login successful');
 		} else {
-			console.log('Login failed');
 			alert('Login failed');
 		}
 	}
@@ -37,7 +34,6 @@
 			localStorage.removeItem('token');
 			isLoggedIn.set(false);
 			goto('/');
-			console.log('Déconnexion');
 			alert('Disconnection');
 		}
 	}
