@@ -1,11 +1,10 @@
-// articles.js
+// back/articles.js
 
 const express = require("express");
 const pool = require("./db");
 const router = express.Router();
 
-// Route pour récupérer tous les articles avec leurs catégories, les plus récents en premier
-router.get("/articles", async (_req, res) => {
+router.get("/articles", async (_req, res, next) => {
   try {
     const allArticles = await pool.query(`
       SELECT articles.*, categories.name AS category_name
@@ -15,13 +14,11 @@ router.get("/articles", async (_req, res) => {
     `);
     res.json(allArticles.rows);
   } catch (err) {
-    console.error("Error fetching all articles:", err);
-    res.status(500).send("Server error");
+    next(err); // Passer l'erreur au middleware de gestion des erreurs
   }
 });
 
-// Route pour récupérer les 6 derniers articles
-router.get("/articles/latest", async (req, res) => {
+router.get("/articles/latest", async (req, res, next) => {
   try {
     const latestArticles = await pool.query(`
       SELECT articles.*, categories.name AS category_name
@@ -32,13 +29,11 @@ router.get("/articles/latest", async (req, res) => {
     `);
     res.json(latestArticles.rows);
   } catch (err) {
-    console.error("Error fetching latest articles:", err);
-    res.status(500).send("Server error");
+    next(err); // Passer l'erreur au middleware de gestion des erreurs
   }
 });
 
-// Route pour récupérer un article spécifique par son ID avec sa catégorie
-router.get("/articles/:id", async (req, res) => {
+router.get("/articles/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const articleQuery = `
@@ -53,13 +48,11 @@ router.get("/articles/:id", async (req, res) => {
       res.status(404).send("Article not found");
     }
   } catch (err) {
-    console.error("Error fetching article by ID:", err);
-    res.status(500).send("Server error");
+    next(err); // Passer l'erreur au middleware de gestion des erreurs
   }
 });
 
-// Route DELETE pour supprimer un article
-router.delete("/articles/:id", async (req, res) => {
+router.delete("/articles/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleteQuery = "DELETE FROM articles WHERE id = $1";
@@ -70,13 +63,11 @@ router.delete("/articles/:id", async (req, res) => {
       res.status(404).send({ success: false, message: "Article not found." });
     }
   } catch (err) {
-    console.error("Error deleting article:", err);
-    res.status(500).send("Server error");
+    next(err); // Passer l'erreur au middleware de gestion des erreurs
   }
 });
 
-// Route pour ajouter un nouvel article
-router.post("/articles", async (req, res) => {
+router.post("/articles", async (req, res, next) => {
   try {
     const { title, category_id, content } = req.body;
     const insertQuery = `
@@ -90,8 +81,7 @@ router.post("/articles", async (req, res) => {
     ]);
     res.json(newArticle.rows[0]);
   } catch (err) {
-    console.error("Error creating new article:", err);
-    res.status(500).send("Server error");
+    next(err); // Passer l'erreur au middleware de gestion des erreurs
   }
 });
 
