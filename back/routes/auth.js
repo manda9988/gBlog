@@ -1,4 +1,4 @@
-// back/auth.js
+// back/routes/auth.js
 
 const express = require("express");
 const jwt = require("jsonwebtoken");
@@ -36,4 +36,20 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-module.exports = router;
+// Middleware pour vérifier le token JWT
+const authenticateJWT = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (token) {
+    jwt.verify(token, SECRET_KEY, (err, user) => {
+      if (err) {
+        return res.sendStatus(403); // Token invalide
+      }
+      req.user = user;
+      next();
+    });
+  } else {
+    res.sendStatus(401); // Aucun token fourni
+  }
+};
+
+module.exports = { router, authenticateJWT };

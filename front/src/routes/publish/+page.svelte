@@ -2,22 +2,30 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { isLoggedIn } from '../../lib/authStore';
 	import type { Category, ArticleData } from '../../app.d.ts';
 	import '../../styles/publish.scss';
 
 	let categories: Category[] = [];
 
-	// Ajout de la baseUrl pour utiliser les variables d'environnement
 	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
-	onMount(async () => {
-		// Utilisation de baseUrl dans l'appel fetch
-		const response = await fetch(`${baseUrl}/categories`);
-		if (response.ok) {
-			categories = (await response.json()) as Category[];
-		} else {
-			console.error('Failed to load categories:', await response.text());
+	onMount(() => {
+		if (!$isLoggedIn) {
+			goto('/login'); // Rediriger vers la page de login si non connecté
 		}
+
+		async function fetchCategories() {
+			const response = await fetch(`${baseUrl}/categories`);
+			if (response.ok) {
+				categories = (await response.json()) as Category[];
+			} else {
+				console.error('Failed to load categories:', await response.text());
+			}
+		}
+
+		fetchCategories();
 	});
 
 	function handleSubmit(event: Event) {
@@ -38,7 +46,6 @@
 	}
 
 	async function submitArticle(articleData: ArticleData) {
-		// Utilisation de baseUrl dans l'appel fetch
 		const response = await fetch(`${baseUrl}/articles`, {
 			method: 'POST',
 			headers: {

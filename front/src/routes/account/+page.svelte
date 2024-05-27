@@ -2,27 +2,34 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { isLoggedIn } from '../../lib/authStore';
 	import type { Article } from '../../app.d.ts';
 	import '../../styles/account.scss';
 
 	let articles: Article[] = [];
 
-	// Ajout de la baseUrl pour utiliser les variables d'environnement
 	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
-	onMount(async () => {
-		// Utilisation de baseUrl dans l'appel fetch
-		const response = await fetch(`${baseUrl}/articles`);
-		if (response.ok) {
-			articles = await response.json();
-		} else {
-			console.error('Failed to fetch articles:', await response.text());
+	onMount(() => {
+		if (!$isLoggedIn) {
+			goto('/login'); // Rediriger vers la page de login si non connecté
 		}
+
+		async function fetchArticles() {
+			const response = await fetch(`${baseUrl}/articles`);
+			if (response.ok) {
+				articles = await response.json();
+			} else {
+				console.error('Failed to fetch articles:', await response.text());
+			}
+		}
+
+		fetchArticles();
 	});
 
 	async function deleteArticle(articleId: number) {
 		if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
-			// Utilisation de baseUrl dans l'appel fetch
 			const response = await fetch(`${baseUrl}/articles/${articleId}`, {
 				method: 'DELETE'
 			});

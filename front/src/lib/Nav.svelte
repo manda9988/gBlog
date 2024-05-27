@@ -12,8 +12,11 @@
 <nav>
 	<a href="/" class:active={$currentPath === '/'}>Home</a>
 	<a href="/all" class:active={$currentPath === '/all'}>All</a>
-	<a href="/publish" class:active={$currentPath === '/publish'}>Publish</a>
-	<a href="/account" class:active={$currentPath === '/account'}>Account</a>
+	{#if $isLoggedIn}
+		<!-- Afficher Publish et Account seulement si l'utilisateur est connecté -->
+		<a href="/publish" class:active={$currentPath === '/publish'}>Publish</a>
+		<a href="/account" class:active={$currentPath === '/account'}>Account</a>
+	{/if}
 	<a href="/login" class:active={$currentPath === '/login'}>
 		{#if $isLoggedIn}
 			Hi Admin✌️
