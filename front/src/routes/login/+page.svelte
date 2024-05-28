@@ -8,9 +8,13 @@
 	let email = '';
 	let password = '';
 
+	// Ajout de la baseUrl pour utiliser les variables d'environnement
+	const baseUrl = import.meta.env.VITE_BACKEND_URL;
+
 	async function login(event: Event) {
 		event.preventDefault();
-		const response = await fetch('http://localhost:3000/login', {
+		// Utilisation de baseUrl dans l'appel fetch
+		const response = await fetch(`${baseUrl}/login`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
