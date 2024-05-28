@@ -1,6 +1,6 @@
 <!-- src/lib/Footer.svelte -->
 <footer>
-	<p>© 2024 gBlog. Tous droits réservés.</p>
+	<p>Copyright © 2024 - Tous droits réservés. Blog _</p>
 </footer>
 
 <style lang="scss">
