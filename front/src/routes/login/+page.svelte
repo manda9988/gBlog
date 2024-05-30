@@ -2,7 +2,7 @@
 
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { isLoggedIn } from '../../lib/authStore';
+	import { isLoggedIn, startLogoutTimer } from '../../lib/authStore';
 	import '../../styles/login.scss';
 
 	let email = '';
@@ -26,10 +26,11 @@
 			const data = await response.json();
 			localStorage.setItem('token', data.token);
 			isLoggedIn.set(true);
-			goto('/'); // Redirect to home after successful login
-			alert('Login successful');
+			startLogoutTimer(); // Démarrer le timer de déconnexion après la connexion
+			goto('/'); // Redirection vers la page d'accueil après la connexion réussie
+			alert('Connexion réussie');
 		} else {
-			alert('Login failed');
+			alert('Échec de la connexion');
 		}
 	}
 
@@ -38,7 +39,7 @@
 			localStorage.removeItem('token');
 			isLoggedIn.set(false);
 			goto('/');
-			alert('Disconnection');
+			alert('Déconnexion réussie');
 		}
 	}
 </script>
@@ -51,10 +52,10 @@
 				<input type="email" id="email" bind:value={email} autocomplete="new-password" />
 			</div>
 			<div>
-				<label for="password">Password</label>
+				<label for="password">Mot de passe</label>
 				<input type="password" id="password" bind:value={password} autocomplete="new-password" />
 			</div>
-			<button type="submit">Login</button>
+			<button type="submit">Connexion</button>
 		</form>
 	{:else}
 		<button class="logout-button" on:click={logout}>Déconnexion</button>
