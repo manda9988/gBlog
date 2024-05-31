@@ -2,18 +2,15 @@
 
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { isLoggedIn, startLogoutTimer } from '../../lib/authStore';
+	import { isLoggedIn, startLogoutTimer, logout } from '../../lib/authStore';
 	import '../../styles/login.scss';
 
 	let email = '';
 	let password = '';
-
-	// Ajout de la baseUrl pour utiliser les variables d'environnement
 	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 	async function login(event: Event) {
 		event.preventDefault();
-		// Utilisation de baseUrl dans l'appel fetch
 		const response = await fetch(`${baseUrl}/login`, {
 			method: 'POST',
 			headers: {
@@ -26,20 +23,11 @@
 			const data = await response.json();
 			localStorage.setItem('token', data.token);
 			isLoggedIn.set(true);
-			startLogoutTimer(); // Démarrer le timer de déconnexion après la connexion
-			goto('/'); // Redirection vers la page d'accueil après la connexion réussie
+			startLogoutTimer();
+			goto('/');
 			alert('Connexion réussie');
 		} else {
 			alert('Échec de la connexion');
-		}
-	}
-
-	function logout() {
-		if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
-			localStorage.removeItem('token');
-			isLoggedIn.set(false);
-			goto('/');
-			alert('Déconnexion réussie');
 		}
 	}
 </script>
