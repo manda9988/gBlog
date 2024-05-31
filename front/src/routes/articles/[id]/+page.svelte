@@ -28,6 +28,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Article détails - Blog_</title>
+</svelte:head>
+
 {#if article}
 	<article>
 		<div class="article-header">

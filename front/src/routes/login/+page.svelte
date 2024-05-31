@@ -32,6 +32,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Connexion - Blog_</title>
+</svelte:head>
+
 <section>
 	{#if !$isLoggedIn}
 		<form on:submit={login} autocomplete="off">

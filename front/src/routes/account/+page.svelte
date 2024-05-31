@@ -43,6 +43,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Compte Utilisateur - Blog_</title>
+</svelte:head>
+
 <section class="account-section">
 	<div class="articles-grid">
 		<div class="grid-header">Titre</div>

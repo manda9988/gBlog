@@ -62,6 +62,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Publier un Article - Blog_</title>
+</svelte:head>
+
 <section class="publish-section">
 	<form on:submit={handleSubmit}>
 		<div class="form-group">

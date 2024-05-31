@@ -18,6 +18,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Accueil - Blog_</title>
+</svelte:head>
+
 <div class="gallery">
 	{#each articles as article}
 		<a
