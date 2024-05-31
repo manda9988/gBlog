@@ -1,9 +1,12 @@
 <!-- src/lib/Title.svelte -->
+
 <script>
 	export let title = 'Blog ...';
 </script>
 
-<h1>{title}</h1>
+<a href="/">
+	<h1>{title}</h1>
+</a>
 
 <style lang="scss">
 	h1 {
@@ -13,10 +16,10 @@
 		width: 100%;
 		padding: 4px 0;
 		margin: 0;
-		// text-transform: uppercase;
 		letter-spacing: -3.2px;
 		font-weight: 900;
 		font-size: 2.5rem;
 		font-family: 'Orbitron', sans-serif;
+		cursor: pointer;
 	}
 </style>

@@ -28,8 +28,8 @@
 		fetchArticles();
 	});
 
-	async function deleteArticle(articleId: number) {
-		if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+	async function deleteArticle(articleId: number, articleTitle: string) {
+		if (confirm(`Êtes-vous sûr de vouloir supprimer l'article "${articleTitle}" ?`)) {
 			const response = await fetch(`${baseUrl}/articles/${articleId}`, {
 				method: 'DELETE'
 			});
@@ -54,7 +54,10 @@
 			<div class="grid-item">{article.category_name}</div>
 			<div class="grid-item">{new Date(article.published_at).toLocaleDateString()}</div>
 			<div class="grid-item">
-				<button class="delete-button" on:click={() => deleteArticle(article.id)}>Supprimer</button>
+				<button class="delete-button" on:click={() => deleteArticle(article.id, article.title)}
+					>Supprimer</button
+				>
+
 				<button class="edit-button" disabled>Modifier</button>
 			</div>
 		{/each}
