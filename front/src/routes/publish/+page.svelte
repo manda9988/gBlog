@@ -63,7 +63,8 @@
 </script>
 
 <svelte:head>
-	<title>Publier un Article - Blog_</title>
+	<title>Publier un Article | Blog_</title>
+	<meta name="description" content="Publier un Article sur Blog_" />
 </svelte:head>
 
 <section class="publish-section">

@@ -29,7 +29,8 @@
 </script>
 
 <svelte:head>
-	<title>Article détails - Blog_</title>
+	<title>Article | Blog_</title>
+	<meta name="description" content="Article | Blog_" />
 </svelte:head>
 
 {#if article}

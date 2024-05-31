@@ -19,7 +19,8 @@
 </script>
 
 <svelte:head>
-	<title>Accueil - Blog_</title>
+	<title>Accueil | Blog_</title>
+	<meta name="description" content="Bienvenue sur la page d'accueil de Blog_" />
 </svelte:head>
 
 <div class="gallery">

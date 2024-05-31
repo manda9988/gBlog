@@ -33,7 +33,8 @@
 </script>
 
 <svelte:head>
-	<title>Connexion - Blog_</title>
+	<title>Connexion | Blog_</title>
+	<meta name="description" content="Connexion | Blog_" />
 </svelte:head>
 
 <section>

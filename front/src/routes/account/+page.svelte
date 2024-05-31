@@ -44,7 +44,8 @@
 </script>
 
 <svelte:head>
-	<title>Compte Utilisateur - Blog_</title>
+	<title>Compte Utilisateur | Blog_</title>
+	<meta name="description" content="Compte Utilisateur | Blog_" />
 </svelte:head>
 
 <section class="account-section">

@@ -19,7 +19,8 @@
 </script>
 
 <svelte:head>
-	<title>Tous les articles - Blog_</title>
+	<title>Tous les articles | Blog_</title>
+	<meta name="description" content="Tous les articles | Blog_" />
 </svelte:head>
 
 <div class="gallery">
