@@ -2,6 +2,8 @@
 
 const express = require("express");
 const cors = require("cors");
+const compression = require("compression"); // Importer le module de compression
+
 const { router: authRouter, authenticateJWT } = require("./routes/auth");
 const articlesRouter = require("./routes/articles");
 const categoriesRouter = require("./routes/categories");
@@ -19,6 +21,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(compression()); // Utiliser le middleware de compression
 
 app.use(authRouter);
 app.use(articlesRouter);
