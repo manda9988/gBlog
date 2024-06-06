@@ -3,7 +3,7 @@ article {
 	max-width: 750px;
 	background-color: #dcdcdc;
 	margin: 40px auto;
-	padding-bottom: 50px;
+	// padding-bottom: 50px;
 	border-radius: 8px;
 
 	.article-header {
@@ -19,19 +19,36 @@ article {
 		}
 	}
 
-	h1 {
-		text-align: center;
-		font-size: 2.8em;
-		font-weight: 900;
-		color: #333;
-		margin: 16px 0 14px;
-		text-transform: uppercase;
+	.content {
+		padding: 0 26px 24px;
+		h1 {
+			text-align: center;
+			font-size: 2.8em;
+			font-weight: 900;
+			color: #333;
+			margin: 16px 14px 14px;
+			text-transform: uppercase;
+			word-break: break-word; /* Ajouté pour gérer les longs mots */
+		}
+
+		p {
+			text-align: justify;
+			font-size: 1em;
+			color: #464646;
+			line-height: 1.6;
+		}
+		/* Ajouter cette classe pour gérer les sauts de ligne */
+		.custom-br {
+			display: block;
+			margin-bottom: 0.8em; /* Ajuste cette valeur pour définir la hauteur des sauts de ligne */
+		}
 	}
 
-	p {
-		text-align: center;
-		font-size: 1em;
-		color: #464646;
-		line-height: 1.6;
+	@media (max-width: 850px) {
+		.content {
+			h1 {
+				font-size: 2em;
+			}
+		}
 	}
 }

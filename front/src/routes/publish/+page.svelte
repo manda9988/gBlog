@@ -71,7 +71,7 @@
 	<form on:submit={handleSubmit}>
 		<div class="form-group">
 			<label for="title">Titre de l'article</label>
-			<input type="text" id="title" />
+			<input type="text" id="title" maxlength="25" />
 		</div>
 		<div class="form-group">
 			<label for="category">Catégorie</label>

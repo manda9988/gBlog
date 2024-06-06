@@ -8,6 +8,7 @@
 	margin: 48px 0;
 	background: rgb(238, 238, 238);
 	.article-preview {
+		padding: 12px;
 		width: 28vw;
 		height: 160px;
 		background: rgb(39, 39, 39);
@@ -30,6 +31,9 @@
 			text-transform: uppercase;
 			font-weight: 900;
 			font-size: 1em;
+			text-align: center;
+			white-space: normal;
+			word-break: break-word;
 		}
 	}
 

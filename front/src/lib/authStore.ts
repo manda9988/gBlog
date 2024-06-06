@@ -9,7 +9,7 @@ export const isLoggedIn = writable(
 
 let logoutTimeout: ReturnType<typeof setTimeout>;
 
-export function startLogoutTimer(duration = 600000) {
+export function startLogoutTimer(duration = 6000000) {
 	clearTimeout(logoutTimeout);
 
 	// Stocker l'heure de déconnexion dans le localStorage

@@ -16,6 +16,14 @@
 		const response = await fetch(`${baseUrl}/articles/${id}`);
 		if (response.ok) {
 			article = await response.json();
+			// Remplacer les balises <br> par des <div> après le rendu
+			setTimeout(() => {
+				document.querySelectorAll('.content p br').forEach((br) => {
+					const div = document.createElement('div');
+					div.classList.add('custom-br');
+					br.replaceWith(div);
+				});
+			}, 0);
 		} else {
 			console.error('Failed to fetch article:', await response.text());
 		}
@@ -39,8 +47,10 @@
 			<p class="article-date">Publié le {formatDate(article.published_at)}</p>
 			<p class="article-category">Catégorie: {article.category_name}</p>
 		</div>
-		<h1>{article.title}</h1>
-		<p>{article.content}</p>
+		<div class="content">
+			<h1>{article.title}</h1>
+			<p>{@html article.content.replace(/\n/g, '<br>')}</p>
+		</div>
 	</article>
 {:else}
 	<p>Loading article or article not found...</p>
