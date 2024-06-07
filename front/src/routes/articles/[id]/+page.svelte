@@ -16,14 +16,6 @@
 		const response = await fetch(`${baseUrl}/articles/${id}`);
 		if (response.ok) {
 			article = await response.json();
-			// Remplacer les balises <br> par des <div> après le rendu
-			setTimeout(() => {
-				document.querySelectorAll('.content p br').forEach((br) => {
-					const div = document.createElement('div');
-					div.classList.add('custom-br');
-					br.replaceWith(div);
-				});
-			}, 0);
 		} else {
 			console.error('Failed to fetch article:', await response.text());
 		}

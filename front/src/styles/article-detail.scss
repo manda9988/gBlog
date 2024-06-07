@@ -37,11 +37,6 @@ article {
 			color: #464646;
 			line-height: 1.6;
 		}
-		/* Ajouter cette classe pour gérer les sauts de ligne */
-		.custom-br {
-			display: block;
-			margin-bottom: 0.8em; /* Ajuste cette valeur pour définir la hauteur des sauts de ligne */
-		}
 	}
 
 	@media (max-width: 850px) {
