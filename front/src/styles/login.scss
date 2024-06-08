@@ -1,4 +1,4 @@
-section {
+.login-section {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -13,7 +13,7 @@ section {
 		margin-bottom: 50px;
 		background: rgb(243, 243, 243);
 		border-radius: 10px;
-		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+		box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
 		width: 80%;
 		max-width: 440px;
 
@@ -37,7 +37,7 @@ section {
 
 		button {
 			padding: 0.6rem 1.2rem;
-			background-color: rgb(42, 42, 42);
+			background: rgb(42, 42, 42);
 			color: rgb(238, 238, 238);
 			border: none;
 			border-radius: 4px;
@@ -46,7 +46,7 @@ section {
 			text-transform: uppercase;
 
 			&:hover {
-				background-color: darken(rgb(42, 42, 42), 10%);
+				background: darken(rgb(42, 42, 42), 10%);
 			}
 		}
 	}
@@ -60,6 +60,8 @@ section {
 		border-radius: 8px;
 		font-weight: 900;
 		cursor: pointer;
+		box-shadow: 0px 20px 25px rgba(50, 50, 50, 0.208);
+
 		&:hover {
 			background-color: lighten(#131313, 8%);
 		}
@@ -67,7 +69,7 @@ section {
 
 	@media (max-width: 600px) {
 		form {
-			max-width: 320px;
+			width: 86%;
 		}
 	}
 }

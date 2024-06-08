@@ -37,7 +37,7 @@
 	<meta name="description" content="Connexion | Blog_" />
 </svelte:head>
 
-<section>
+<section class="login-section">
 	{#if !$isLoggedIn}
 		<form on:submit={login} autocomplete="off">
 			<div>
