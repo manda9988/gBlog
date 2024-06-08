@@ -83,6 +83,10 @@
 			</select>
 		</div>
 		<div class="form-group">
+			<label for="image">Image de l'article</label>
+			<input type="file" id="image" accept="image/*" />
+		</div>
+		<div class="form-group">
 			<label for="content">Contenu de l'article</label>
 			<textarea id="content" rows="10"></textarea>
 		</div>
