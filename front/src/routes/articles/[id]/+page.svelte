@@ -35,16 +35,16 @@
 
 {#if article}
 	<article class="articleID">
-		<div class="article-header">
-			<p class="article-date">Publié le {formatDate(article.published_at)}</p>
-			<p class="article-category">Catégorie: {article.category_name}</p>
-		</div>
 		<div class="content">
-			<div class="title">
+			<div class="article-header">
+				<p class="article-date">Publié le {formatDate(article.published_at)}</p>
+				<p class="article-category">Catégorie: {article.category_name}</p>
+			</div>
+			<div class="imgTitle">
 				<h1>{article.title}</h1>
 			</div>
-			<p>{@html article.content.replace(/\n/g, '<br>')}</p>
 		</div>
+		<p>{@html article.content.replace(/\n/g, '<br>')}</p>
 	</article>
 {:else}
 	<p>Loading article or article not found...</p>
