@@ -34,13 +34,15 @@
 </svelte:head>
 
 {#if article}
-	<article>
+	<article class="articleID">
 		<div class="article-header">
 			<p class="article-date">Publié le {formatDate(article.published_at)}</p>
 			<p class="article-category">Catégorie: {article.category_name}</p>
 		</div>
 		<div class="content">
-			<h1>{article.title}</h1>
+			<div class="title">
+				<h1>{article.title}</h1>
+			</div>
 			<p>{@html article.content.replace(/\n/g, '<br>')}</p>
 		</div>
 	</article>

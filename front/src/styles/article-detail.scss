@@ -1,4 +1,4 @@
-article {
+.articleID {
 	width: 75vw;
 	max-width: 750px;
 	background-color: #dcdcdc;
@@ -21,14 +21,22 @@ article {
 
 	.content {
 		padding: 0 26px 24px;
-		h1 {
-			text-align: center;
-			font-size: 2.8em;
-			font-weight: 900;
-			color: #333;
-			margin: 16px 14px 14px;
-			text-transform: uppercase;
-			word-break: break-word; /* Ajouté pour gérer les longs mots */
+
+		.title {
+			background: rgb(255, 122, 122);
+			margin: 26px 0px 24px;
+			padding: 8px 0px;
+
+			h1 {
+				text-align: center;
+				font-size: 2.8em;
+				font-weight: 900;
+				color: #373737;
+				text-transform: uppercase;
+				word-break: break-word;
+				line-height: 1.2;
+				// background: greenyellow;
+			}
 		}
 
 		p {
@@ -41,8 +49,10 @@ article {
 
 	@media (max-width: 850px) {
 		.content {
-			h1 {
-				font-size: 2em;
+			.title {
+				h1 {
+					font-size: 2em;
+				}
 			}
 		}
 	}
