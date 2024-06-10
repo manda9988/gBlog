@@ -3,28 +3,34 @@
 const express = require("express");
 const pool = require("../db");
 const router = express.Router();
-const cloudinary = require("cloudinary").v2; // Importer Cloudinary
-const multer = require("multer"); // Importer Multer
-const { CloudinaryStorage } = require("multer-storage-cloudinary"); // Importer le stockage Cloudinary
+const cloudinary = require("cloudinary").v2;
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
-// Configurer Cloudinary avec les variables d'environnement
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Configurer Multer pour utiliser Cloudinary comme stockage
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "blog_images", // Dossier dans Cloudinary
-    format: async (req, file) => "png", // Format de fichier (par exemple, png)
+    folder: "blog_images",
+    format: async (req, file) => {
+      // Récupérer l'extension du fichier
+      const ext = file.mimetype.split("/")[1];
+      // Limiter les formats autorisés
+      if (["jpg", "jpeg", "png", "gif"].includes(ext)) {
+        return ext;
+      }
+      return "png"; // Par défaut, utiliser png
+    },
     public_id: (req, file) => file.originalname,
   },
 });
 
-const upload = multer({ storage: storage }); // Créer un middleware Multer avec le stockage Cloudinary
+const upload = multer({ storage: storage });
 
 router.get("/articles", async (_req, res, next) => {
   try {
@@ -36,7 +42,7 @@ router.get("/articles", async (_req, res, next) => {
     `);
     res.json(allArticles.rows);
   } catch (err) {
-    next(err); // Passer l'erreur au middleware de gestion des erreurs
+    next(err);
   }
 });
 
@@ -89,7 +95,6 @@ router.delete("/articles/:id", async (req, res, next) => {
   }
 });
 
-// Route pour l'upload des images
 router.post("/upload", upload.single("image"), (req, res) => {
   if (req.file) {
     res.json({ imageUrl: req.file.path });
@@ -100,16 +105,16 @@ router.post("/upload", upload.single("image"), (req, res) => {
 
 router.post("/articles", async (req, res, next) => {
   try {
-    const { title, category_id, content, image_url } = req.body; // Ajouter image_url ici
+    const { title, category_id, content, image_url } = req.body;
     const insertQuery = `
-      INSERT INTO articles (title, category_id, content, image_url, published_at) // Ajouter image_url ici
-      VALUES ($1, $2, $3, $4, NOW()) // Ajouter image_url ici
+      INSERT INTO articles (title, category_id, content, image_url, published_at) 
+      VALUES ($1, $2, $3, $4, NOW()) 
       RETURNING *`;
     const newArticle = await pool.query(insertQuery, [
       title,
       category_id,
       content,
-      image_url, // Ajouter image_url ici
+      image_url,
     ]);
     res.json(newArticle.rows[0]);
   } catch (err) {

@@ -30,6 +30,9 @@
 			class="article-preview"
 			aria-label={`En savoir plus sur ${article.title}`}
 		>
+			{#if article.image_url}
+				<img src={article.image_url} alt={`Image de ${article.title}`} class="article-image" />
+			{/if}
 			<p class="article-title">{article.title}</p>
 		</a>
 	{/each}
