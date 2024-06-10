@@ -3,7 +3,28 @@
 const express = require("express");
 const pool = require("../db");
 const router = express.Router();
-const { upload } = require("../index"); // Importer le middleware upload
+const cloudinary = require("cloudinary").v2; // Importer Cloudinary
+const multer = require("multer"); // Importer Multer
+const { CloudinaryStorage } = require("multer-storage-cloudinary"); // Importer le stockage Cloudinary
+
+// Configurer Cloudinary avec les variables d'environnement
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Configurer Multer pour utiliser Cloudinary comme stockage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "blog_images", // Dossier dans Cloudinary
+    format: async (req, file) => "png", // Format de fichier (par exemple, png)
+    public_id: (req, file) => file.originalname,
+  },
+});
+
+const upload = multer({ storage: storage }); // Créer un middleware Multer avec le stockage Cloudinary
 
 router.get("/articles", async (_req, res, next) => {
   try {
@@ -79,15 +100,16 @@ router.post("/upload", upload.single("image"), (req, res) => {
 
 router.post("/articles", async (req, res, next) => {
   try {
-    const { title, category_id, content } = req.body;
+    const { title, category_id, content, image_url } = req.body; // Ajouter image_url ici
     const insertQuery = `
-      INSERT INTO articles (title, category_id, content, published_at)
-      VALUES ($1, $2, $3, NOW())
+      INSERT INTO articles (title, category_id, content, image_url, published_at) // Ajouter image_url ici
+      VALUES ($1, $2, $3, $4, NOW()) // Ajouter image_url ici
       RETURNING *`;
     const newArticle = await pool.query(insertQuery, [
       title,
       category_id,
       content,
+      image_url, // Ajouter image_url ici
     ]);
     res.json(newArticle.rows[0]);
   } catch (err) {
