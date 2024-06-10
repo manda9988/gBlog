@@ -8,6 +8,7 @@
 	import '../../styles/publish.scss';
 
 	let categories: Category[] = [];
+	let imageUrl: string = ''; // Ajouter une variable pour l'URL de l'image
 
 	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -28,6 +29,27 @@
 		fetchCategories();
 	});
 
+	// Fonction pour gérer l'upload de l'image
+	async function handleImageUpload(event: Event) {
+		const fileInput = event.target as HTMLInputElement;
+		if (fileInput.files && fileInput.files.length > 0) {
+			const formData = new FormData();
+			formData.append('image', fileInput.files[0]);
+
+			const response = await fetch(`${baseUrl}/upload`, {
+				method: 'POST',
+				body: formData
+			});
+
+			if (response.ok) {
+				const data = await response.json();
+				imageUrl = data.imageUrl; // Stocker l'URL de l'image
+			} else {
+				console.error('Image upload failed:', await response.text());
+			}
+		}
+	}
+
 	function handleSubmit(event: Event) {
 		event.preventDefault();
 		if (!confirm('Êtes-vous sûr de vouloir publier cet article?')) {
@@ -40,7 +62,8 @@
 		const formData: ArticleData = {
 			title,
 			category_id: Number(categoryId),
-			content
+			content,
+			image_url: imageUrl // Inclure l'URL de l'image dans les données de l'article
 		};
 		submitArticle(formData);
 	}
@@ -84,7 +107,8 @@
 		</div>
 		<div class="form-group">
 			<label for="image">Image de l'article</label>
-			<input type="file" id="image" accept="image/*" />
+
+			<input type="file" id="image" accept="image/*" on:change={handleImageUpload} />
 		</div>
 		<div class="form-group">
 			<label for="content">Contenu de l'article</label>

@@ -6,6 +6,7 @@ export interface Article {
 	category_id: number;
 	category_name?: string;
 	published_at: string;
+	image_url?: string; // Ajouter image_url ici
 }
 
 export interface Category {
@@ -17,4 +18,5 @@ export interface ArticleData {
 	title: string;
 	category_id: number;
 	content: string;
+	image_url?: string; // Ajouter image_url ici
 }

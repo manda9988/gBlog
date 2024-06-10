@@ -3,6 +3,9 @@
 const express = require("express");
 const cors = require("cors");
 const compression = require("compression"); // Importer le module de compression
+const cloudinary = require("cloudinary").v2; // Importer Cloudinary
+const multer = require("multer"); // Importer Multer
+const { CloudinaryStorage } = require("multer-storage-cloudinary"); // Importer le stockage Cloudinary
 
 const { router: authRouter, authenticateJWT } = require("./routes/auth");
 const articlesRouter = require("./routes/articles");
@@ -13,6 +16,25 @@ require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Configurer Cloudinary avec les variables d'environnement
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Configurer Multer pour utiliser Cloudinary comme stockage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "blog_images", // Dossier dans Cloudinary
+    format: async (req, file) => "png", // Format de fichier (par exemple, png)
+    public_id: (req, file) => file.originalname,
+  },
+});
+
+const upload = multer({ storage: storage }); // Créer un middleware Multer avec le stockage Cloudinary
 
 const corsOptions = {
   origin: ["https://gblog-bice.vercel.app", "http://localhost:5173"],

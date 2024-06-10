@@ -3,6 +3,7 @@
 const express = require("express");
 const pool = require("../db");
 const router = express.Router();
+const { upload } = require("../index"); // Importer le middleware upload
 
 router.get("/articles", async (_req, res, next) => {
   try {
@@ -29,7 +30,7 @@ router.get("/articles/latest", async (_req, res, next) => {
     `);
     res.json(latestArticles.rows);
   } catch (err) {
-    next(err); 
+    next(err);
   }
 });
 
@@ -48,7 +49,7 @@ router.get("/articles/:id", async (req, res, next) => {
       res.status(404).send("Article not found");
     }
   } catch (err) {
-    next(err); 
+    next(err);
   }
 });
 
@@ -63,7 +64,16 @@ router.delete("/articles/:id", async (req, res, next) => {
       res.status(404).send({ success: false, message: "Article not found." });
     }
   } catch (err) {
-    next(err); 
+    next(err);
+  }
+});
+
+// Route pour l'upload des images
+router.post("/upload", upload.single("image"), (req, res) => {
+  if (req.file) {
+    res.json({ imageUrl: req.file.path });
+  } else {
+    res.status(400).send("Image upload failed");
   }
 });
 
@@ -81,7 +91,7 @@ router.post("/articles", async (req, res, next) => {
     ]);
     res.json(newArticle.rows[0]);
   } catch (err) {
-    next(err); 
+    next(err);
   }
 });
 
