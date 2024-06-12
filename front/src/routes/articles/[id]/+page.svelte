@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import type { Article } from '../../../app.d.ts';
-	import '../../../styles/article-detail.scss';
+	import '../../../styles/id.scss';
 
 	let article: Article | undefined;
 
@@ -16,7 +16,6 @@
 		const response = await fetch(`${baseUrl}/articles/${id}`);
 		if (response.ok) {
 			article = await response.json();
-			console.log(article); // Ajoute cette ligne pour vérifier les données reçues
 		} else {
 			console.error('Failed to fetch article:', await response.text());
 		}

@@ -35,7 +35,7 @@ const upload = multer({ storage: storage });
 router.get("/articles", async (_req, res, next) => {
   try {
     const allArticles = await pool.query(`
-      SELECT articles.*, categories.name AS category_name
+      SELECT articles.*, categories.name AS category_name, articles.image_url
       FROM articles
       JOIN categories ON articles.category_id = categories.id
       ORDER BY articles.published_at DESC
@@ -49,7 +49,7 @@ router.get("/articles", async (_req, res, next) => {
 router.get("/articles/latest", async (_req, res, next) => {
   try {
     const latestArticles = await pool.query(`
-      SELECT articles.*, categories.name AS category_name
+      SELECT articles.*, categories.name AS category_name, articles.image_url
       FROM articles
       JOIN categories ON articles.category_id = categories.id
       ORDER BY articles.published_at DESC
@@ -60,6 +60,7 @@ router.get("/articles/latest", async (_req, res, next) => {
     next(err);
   }
 });
+
 
 router.get("/articles/:id", async (req, res, next) => {
   try {
