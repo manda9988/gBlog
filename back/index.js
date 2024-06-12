@@ -2,7 +2,7 @@
 
 const express = require("express");
 const cors = require("cors");
-const compression = require("compression"); // Importer le module de compressio
+const compression = require("compression"); // Importer le module de compression
 
 const { router: authRouter, authenticateJWT } = require("./routes/auth");
 const articlesRouter = require("./routes/articles");
