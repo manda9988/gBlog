@@ -16,6 +16,7 @@
 		const response = await fetch(`${baseUrl}/articles/${id}`);
 		if (response.ok) {
 			article = await response.json();
+			console.log(article); // Ajoute cette ligne pour vérifier les données reçues
 		} else {
 			console.error('Failed to fetch article:', await response.text());
 		}
@@ -23,7 +24,11 @@
 
 	function formatDate(dateString: string): string {
 		const date = new Date(dateString);
-		const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+		const options: Intl.DateTimeFormatOptions = {
+			year: 'numeric',
+			month: 'numeric',
+			day: 'numeric'
+		};
 		return `${date.toLocaleDateString('fr-FR', options)}`;
 	}
 </script>
@@ -35,15 +40,17 @@
 
 {#if article}
 	<article class="articleID">
-		<div class="content">
-			<div class="article-header">
-				<p class="article-date">Publié le {formatDate(article.published_at)}</p>
-				<p class="article-category">Catégorie: {article.category_name}</p>
-			</div>
-			<div class="imgTitle">
-				<h1>{article.title}</h1>
-			</div>
+		<h1>{article.title}</h1>
+
+		<div class="articleInfos">
+			<p class="article-date">
+				{formatDate(article.published_at)} | {article.category_name}
+			</p>
 		</div>
+		{#if article.image_url}
+			<img src={article.image_url} alt={`Image de ${article.title}`} class="article-image" />
+		{/if}
+
 		<p>{@html article.content.replace(/\n/g, '<br>')}</p>
 	</article>
 {:else}

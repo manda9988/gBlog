@@ -65,7 +65,7 @@ router.get("/articles/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const articleQuery = `
-      SELECT a.id, a.title, a.content, a.category_id, a.published_at, c.name as category_name
+      SELECT a.id, a.title, a.content, a.category_id, a.image_url, a.published_at, c.name as category_name
       FROM articles a
       JOIN categories c ON a.category_id = c.id
       WHERE a.id = $1`;

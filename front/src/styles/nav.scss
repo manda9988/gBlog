@@ -1,6 +1,6 @@
 nav {
-	background: rgb(37, 37, 37);
-	padding: 0.6rem 0;
+	background: rgba(0, 0, 0, 0.849);
+	padding: 0.25rem 0;
 	text-align: center;
 
 	a {
@@ -8,7 +8,7 @@ nav {
 		margin: 0 1rem;
 		text-decoration: none;
 		font-size: 0.8rem;
-		font-weight: 550;
+		font-weight: 350;
 		text-transform: uppercase;
 
 		&:hover {
@@ -19,7 +19,7 @@ nav {
 	.active {
 		color: rgb(154, 154, 154);
 	}
-	@media (max-width: 600px) {
+	@media (max-width: 800px) {
 		a {
 			margin: 0 0.85rem;
 			font-size: 0.7rem;
