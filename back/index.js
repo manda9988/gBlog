@@ -31,6 +31,12 @@ app.use(categoriesRouter);
 app.use("/publish", authenticateJWT);
 app.use("/account", authenticateJWT);
 
+// Middleware de gestion des erreurs - Ajouté pour logger les erreurs
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+
 // Utiliser le middleware de gestion des erreurs
 app.use(errorHandler);
 
