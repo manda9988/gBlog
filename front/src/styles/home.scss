@@ -65,14 +65,18 @@
 		}
 	}
 
-	@media (max-width: 1050px) {
-		grid-template-columns: repeat(3, 1fr);
+	@media (max-width: 1150px) {
 		width: 85vw;
 	}
-	@media (max-width: 700px) {
+	@media (max-width: 850px) {
 		grid-template-columns: repeat(2, 1fr);
 		.article-preview {
-			height: 260px;
+			height: 300px;
+		}
+	}
+	@media (max-width: 500px) {
+		.article-preview {
+			height: 235px;
 		}
 	}
 }
