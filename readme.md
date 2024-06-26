@@ -1,4 +1,4 @@
-Voici le README.md mis à jour avec des informations utiles sur PostgreSQL :
+Voici le README.md complété avec encore plus d'informations utiles :
 
 ````markdown
 # Blog Project
@@ -101,6 +101,22 @@ Le fichier `back/db.js` configure la connexion à PostgreSQL. Assurez-vous que P
 - **categories**: id, name
 - **users**: id, email, password
 
+## Scripts NPM
+
+### Backend
+
+- `start`: Démarre le serveur backend.
+
+### Frontend
+
+- `dev`: Démarre le serveur de développement.
+- `build`: Construit l'application pour la production.
+- `preview`: Prévisualise l'application construite.
+- `check`: Vérifie la syntaxe TypeScript et les types.
+- `check:watch`: Vérifie la syntaxe TypeScript et les types en mode watch.
+- `lint`: Vérifie la syntaxe du code avec Prettier et ESLint.
+- `format`: Formate le code avec Prettier.
+
 ## Gestion des mots de passe
 
 Le fichier `back/hashPassword.js` gère le hachage des mots de passe.
@@ -113,10 +129,15 @@ Le middleware dans `back/middleware/errorHandler.js` gère les erreurs serveur.
 
 Le store `front/src/lib/authStore.ts` gère l'état d'authentification côté frontend.
 
+## Types
+
+Le fichier `front/src/app.d.ts` contient les définitions de types utilisées dans l'application, notamment les interfaces `Article`, `Category`, et `ArticleData`.
+
 ## Auteur
 
 Vincent
 
 ```
 
+Ce README fournit des informations détaillées sur l'installation, la configuration et l'utilisation de votre projet, ainsi que des détails sur les scripts NPM et les types utilisés dans l'application.
 ```
