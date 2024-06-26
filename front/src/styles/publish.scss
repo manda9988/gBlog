@@ -5,6 +5,10 @@
 	padding: 2rem;
 	width: 100%;
 	// background: red;
+	::selection {
+		background: #222222;
+		color: #d4d4d4;
+	}
 
 	form {
 		display: flex;

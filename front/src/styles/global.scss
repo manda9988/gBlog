@@ -20,6 +20,10 @@ body {
 	font-family: 'Roboto', sans-serif;
 	line-height: 1.6;
 	background: rgb(238, 238, 238);
+	::selection {
+		color: #222222;
+		background: #e3e3e3;
+	}
 }
 
 ol,

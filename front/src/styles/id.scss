@@ -6,6 +6,11 @@
 	padding: 8px 16px;
 	color: rgb(49, 49, 49);
 
+	::selection {
+		background: #222222;
+		color: #d4d4d4;
+	}
+
 	h1 {
 		font-size: 4.2em;
 		font-weight: 900;
