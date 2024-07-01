@@ -1,29 +1,40 @@
 <!-- src/routes/all/+page.svelte -->
 
 <script lang="ts">
+	// Importation du type Article
 	import type { Article } from '../../app.d.ts';
+	// Importation des styles pour la page d'accueil
 	import '../../styles/home.scss';
+	// Importation de onMount pour exécuter du code après le montage du composant
 	import { onMount } from 'svelte';
 
+	// Déclaration d'un tableau pour stocker les articles
 	let articles: Article[] = [];
 
-	// Nouvelle URL dynamique basée sur les variables d'environnement
+	// URL dynamique basée sur les variables d'environnement
 	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
+	// Code à exécuter après le montage du composant
 	onMount(async () => {
+		// Requête pour récupérer les articles
 		const response = await fetch(`${baseUrl}/articles`);
 		if (response.ok) {
+			// Mettre à jour les articles si la requête est réussie
 			articles = await response.json();
 		}
 	});
 </script>
 
+<!-- Section pour définir des éléments dans le <head> du document HTML, comme le titre et les meta-données -->
 <svelte:head>
+	<!-- Titre de la page -->
 	<title>Tous les articles | Blog_</title>
+	<!-- Description de la page pour le SEO -->
 	<meta name="description" content="Tous les articles | Blog_" />
 </svelte:head>
 
 <div class="gallery">
+	<!-- Boucle pour afficher chaque article -->
 	{#each articles as article}
 		<a
 			href={`/articles/${article.id}`}

@@ -1,32 +1,42 @@
 <!-- src/routes/publish/+page.svelte -->
 
 <script lang="ts">
+	// Importation de onMount pour exécuter du code après le montage du composant
 	import { onMount } from 'svelte';
+	// Importation de goto pour la navigation
 	import { goto } from '$app/navigation';
+	// Importation du store pour vérifier si l'utilisateur est connecté
 	import { isLoggedIn } from '../../lib/authStore';
+	// Importation des types Category et ArticleData
 	import type { Category, ArticleData } from '../../app.d.ts';
 	import '../../styles/publish.scss';
 
+	// Déclaration d'un tableau pour stocker les catégories
 	let categories: Category[] = [];
-	let imageUrl: string = ''; // Ajouter une variable pour l'URL de l'image
+	// Variable pour stocker l'URL de l'image
+	let imageUrl: string = '';
 
 	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
+	// Code à exécuter après le montage du composant
 	onMount(() => {
 		if (!$isLoggedIn) {
 			goto('/login'); // Rediriger vers la page de login si non connecté
 		}
 
+		// Fonction pour récupérer les catégories
 		async function fetchCategories() {
 			const response = await fetch(`${baseUrl}/categories`);
 			if (response.ok) {
+				// Mettre à jour les catégories si la requête est réussie
 				categories = (await response.json()) as Category[];
 			} else {
+				// Afficher une erreur en cas d'échec
 				console.error('Failed to load categories:', await response.text());
 			}
 		}
 
-		fetchCategories();
+		fetchCategories(); // Appeler la fonction pour récupérer les catégories
 	});
 
 	// Fonction pour gérer l'upload de l'image
@@ -45,13 +55,15 @@
 				const data = await response.json();
 				imageUrl = data.imageUrl; // Stocker l'URL de l'image
 			} else {
+				// Afficher une erreur en cas d'échec
 				console.error('Image upload failed:', await response.text());
 			}
 		}
 	}
 
+	// Fonction pour gérer la soumission du formulaire de publication
 	function handleSubmit(event: Event) {
-		event.preventDefault();
+		event.preventDefault(); // Empêcher le rechargement de la page
 		if (!confirm('Êtes-vous sûr de vouloir publier cet article?')) {
 			return;
 		}
@@ -65,28 +77,34 @@
 			content,
 			image_url: imageUrl // Inclure l'URL de l'image dans les données de l'article
 		};
-		submitArticle(formData);
+		submitArticle(formData); // Appeler la fonction pour soumettre l'article
 	}
 
+	// Fonction pour soumettre l'article à l'API
 	async function submitArticle(articleData: ArticleData) {
 		const response = await fetch(`${baseUrl}/articles`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(articleData)
+			body: JSON.stringify(articleData) // Envoyer les données de l'article en JSON
 		});
 		if (response.ok) {
 			alert("L'article a été publié avec succès!");
 			window.location.href = '/'; // Redirection vers la page d'accueil
 		} else {
+			// Alerter l'utilisateur en cas d'échec
+			alert("Échec de la publication de l'article");
 			console.error('Failed to publish article:', await response.text());
 		}
 	}
 </script>
 
+<!-- Section pour définir des éléments dans le <head> du document HTML, comme le titre et les meta-données -->
 <svelte:head>
+	<!-- Titre de la page -->
 	<title>Publier un Article | Blog_</title>
+	<!-- Description de la page pour le SEO -->
 	<meta name="description" content="Publier un Article sur Blog_" />
 </svelte:head>
 
