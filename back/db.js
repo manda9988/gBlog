@@ -13,5 +13,7 @@ const pool = new Pool({
 module.exports = pool;
 
 // Ce fichier configure une connexion à PostgreSQL en utilisant pg. 
+
 // Il crée un pool de connexions avec des paramètres provenant des variables d'environnement ou des valeurs par défaut. 
+
 // Le pool est exporté pour être utilisé ailleurs dans l'application.

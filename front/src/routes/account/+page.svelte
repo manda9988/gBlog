@@ -1,11 +1,16 @@
 <!-- src/routes/account/+page.svelte -->
 
 <script lang="ts">
-	import { onMount } from 'svelte'; // Importation de onMount pour exécuter du code après le montage du composant
-	import { goto } from '$app/navigation'; // Importation de goto pour la navigation
-	import { isLoggedIn } from '../../lib/authStore'; // Importation du store pour vérifier si l'utilisateur est connecté
-	import type { Article } from '../../app.d.ts'; // Importation du type Article
-	import '../../styles/account.scss'; // Importation des styles
+	// Importation de onMount pour exécuter du code après le montage du composant
+	import { onMount } from 'svelte';
+	// Importation de goto pour la navigation
+	import { goto } from '$app/navigation';
+	// Importation du store pour vérifier si l'utilisateur est connecté
+	import { isLoggedIn } from '../../lib/authStore';
+	// Importation du type Article
+	import type { Article } from '../../app.d.ts';
+	// Importation des styles
+	import '../../styles/account.scss';
 
 	// Déclaration d'un tableau pour stocker les articles
 	let articles: Article[] = [];
