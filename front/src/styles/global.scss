@@ -7,12 +7,15 @@
 *,
 *::before,
 *::after {
-	margin: 0;
+	margin: 0; // Réinitialiser la marge pour tous les éléments
 	padding: 0;
-	box-sizing: inherit;
+	box-sizing: inherit; // Hériter de la valeur de box-sizing du parent
 }
+//*, *::before, et *::after s'appliquent à tous les éléments et pseudo-éléments.
 
 html {
+	/* Inclut la bordure et le padding dans la largeur totale  */
+
 	box-sizing: border-box;
 }
 

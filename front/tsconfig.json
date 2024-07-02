@@ -1,8 +1,14 @@
+// tsconfig.json
+
+// Ce fichier configure TypeScript pour le projet SvelteKit.
+
+// Il étend la configuration par défaut de SvelteKit et définit des options supplémentaires pour le compilateur TypeScript.
+
 {
-	"extends": "./.svelte-kit/tsconfig.json",
+	"extends": "./.svelte-kit/tsconfig.json", // Étend la configuration TypeScript générée par SvelteKit
 	"compilerOptions": {
-		"allowJs": true,
-		"checkJs": true,
+		"allowJs": true, // Permet de compiler des fichiers JavaScript
+		"checkJs": true, // Active la vérification des erreurs dans les fichiers JavaScript
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,

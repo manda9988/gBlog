@@ -12,6 +12,7 @@
 
 	.article-preview {
 		position: relative;
+		// masque le contenu dépassant les dimensions de l'élément.
 		overflow: hidden;
 		padding: 12px;
 		width: 100%;

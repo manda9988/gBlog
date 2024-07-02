@@ -7,7 +7,7 @@
 
 	.articles-grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(4, 1fr); // Grille de 4 colonnes
 		gap: 0.1rem;
 		width: 100%;
 		max-width: 800px;
