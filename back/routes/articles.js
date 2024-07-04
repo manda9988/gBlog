@@ -1,12 +1,12 @@
 // back/articles.js
 
 // Importation des modules nécessaires
-const express = require("express"); // Framework web pour Node.js
-const pool = require("../db"); // Pool de connexions pour PostgreSQL
-const router = express.Router(); // Routeur pour gérer les routes
-const cloudinary = require("cloudinary").v2; // Gestion des images dans le cloud
-const multer = require("multer"); // Middleware pour gérer les uploads de fichiers
-const { CloudinaryStorage } = require("multer-storage-cloudinary"); // Adaptateur Multer pour Cloudinary
+const express = require("express");
+const pool = require("../db");
+const router = express.Router();
+const cloudinary = require("cloudinary").v2;
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 // Configuration de Cloudinary avec les variables d'environnement
 cloudinary.config({
@@ -30,7 +30,7 @@ const storage = new CloudinaryStorage({
       }
       return "png"; // Par défaut, utiliser png
     },
-    public_id: (_req, file) => file.originalname, // Utiliser le nom original du fichier
+    public_id: (_req, file) => file.originalname,
   },
 });
 
@@ -141,5 +141,3 @@ router.post("/articles", async (req, res, next) => {
 });
 
 module.exports = router; // Exportation du routeur
-
-

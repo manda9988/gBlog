@@ -1,17 +1,16 @@
 // back/routes/auth.js
 
 // Importation des modules nécessaires
-const express = require("express"); // Framework web pour Node.js
-const jwt = require("jsonwebtoken"); // Bibliothèque pour gérer les tokens JWT
-const bcrypt = require("bcrypt"); // Bibliothèque pour le hachage des mots de passe
-const pool = require("../db"); // Pool de connexions pour PostgreSQL
-require("dotenv").config(); // Chargement des variables d'environnement depuis un fichier .env
+const express = require("express");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const pool = require("../db");
+require("dotenv").config();
 
-const router = express.Router(); // Routeur pour gérer les routes
-const SECRET_KEY = process.env.SECRET_KEY; // Clé secrète pour signer les tokens JWT
+const router = express.Router();
+const SECRET_KEY = process.env.SECRET_KEY;
 
 // Route pour gérer la connexion des utilisateurs
-
 router.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -35,7 +34,8 @@ router.post("/login", async (req, res, next) => {
       res.status(401).send("Invalid credentials");
     }
   } catch (err) {
-    next(err); // Passer l'erreur au middleware de gestion des erreurs
+    // Passer l'erreur au middleware de gestion des erreurs
+    next(err);
   }
 });
 
@@ -55,4 +55,5 @@ const authenticateJWT = (req, res, next) => {
   }
 };
 
-module.exports = { router, authenticateJWT }; // Exportation du routeur et du middleware d'authentification
+// Exportation du routeur et du middleware d'authentification
+module.exports = { router, authenticateJWT };

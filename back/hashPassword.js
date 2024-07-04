@@ -9,6 +9,8 @@ const plainPassword = "YourPlainPasswordHere";
 
 // Hachage du mot de passe avec bcrypt
 bcrypt.hash(plainPassword, saltRounds, (err, hash) => {
-  if (err) throw err; // Gestion des erreurs éventuelles
-  console.log("Hashed Password:", hash); // Affichage du mot de passe haché
+  // Gestion des erreurs éventuelles
+  if (err) throw err;
+  // Affichage du mot de passe haché
+  console.log("Hashed Password:", hash);
 });
