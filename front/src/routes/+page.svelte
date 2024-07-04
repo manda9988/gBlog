@@ -3,9 +3,7 @@
 <script lang="ts">
 	// Importation du type Article
 	import type { Article } from '../app.d.ts';
-	// Importation des styles pour la page d'accueil
 	import '../styles/home.scss';
-	// Importation de onMount pour exécuter du code après le montage du composant
 	import { onMount } from 'svelte';
 
 	// Déclaration d'un tableau pour stocker les articles

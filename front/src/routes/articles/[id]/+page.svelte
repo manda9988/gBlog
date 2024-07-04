@@ -1,26 +1,20 @@
 <!-- front/src/routes/articles/[id]/+page.svelte -->
 
 <script lang="ts">
-	// Importation de onMount pour exécuter du code après le montage du composant
 	import { onMount } from 'svelte';
-	// Importation du store pour obtenir des informations sur la page actuelle
 	import { page } from '$app/stores';
-	// Importation du type Article
 	import type { Article } from '../../../app.d.ts';
 	import '../../../styles/id.scss';
 
-	let article: Article | undefined; // Déclaration de la variable article
+	let article: Article | undefined;
 
 	// URL dynamique basée sur les variables d'environnement
 	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 	onMount(async () => {
-		// Récupérer l'ID de l'article depuis les paramètres de la page
 		const id = $page.params.id;
-		// Requête pour récupérer l'article par ID
 		const response = await fetch(`${baseUrl}/articles/${id}`);
 		if (response.ok) {
-			// Mettre à jour l'article si la requête est réussie
 			article = await response.json();
 		} else {
 			console.error('Failed to fetch article:', await response.text());
@@ -39,7 +33,7 @@
 	}
 </script>
 
-<!-- Section pour définir des éléments dans le <head> du document HTML, comme le titre et les meta-données -->
+<!-- Section <head> du document HTML avec titre et les meta-données -->
 <svelte:head>
 	<!-- Titre de la page -->
 	<title>Article | Blog_</title>

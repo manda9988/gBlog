@@ -1,42 +1,34 @@
 <!-- src/routes/publish/+page.svelte -->
 
 <script lang="ts">
-	// Importation de onMount pour exécuter du code après le montage du composant
 	import { onMount } from 'svelte';
-	// Importation de goto pour la navigation
 	import { goto } from '$app/navigation';
-	// Importation du store pour vérifier si l'utilisateur est connecté
 	import { isLoggedIn } from '../../lib/authStore';
-	// Importation des types Category et ArticleData
 	import type { Category, ArticleData } from '../../app.d.ts';
 	import '../../styles/publish.scss';
 
-	// Déclaration d'un tableau pour stocker les catégories
 	let categories: Category[] = [];
-	// Variable pour stocker l'URL de l'image
 	let imageUrl: string = '';
 
 	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
-	// Code à exécuter après le montage du composant
 	onMount(() => {
 		if (!$isLoggedIn) {
-			goto('/login'); // Rediriger vers la page de login si non connecté
+			// Rediriger vers la page de login si non connecté
+			goto('/login');
 		}
 
 		// Fonction pour récupérer les catégories
 		async function fetchCategories() {
 			const response = await fetch(`${baseUrl}/categories`);
 			if (response.ok) {
-				// Mettre à jour les catégories si la requête est réussie
 				categories = (await response.json()) as Category[];
 			} else {
-				// Afficher une erreur en cas d'échec
 				console.error('Failed to load categories:', await response.text());
 			}
 		}
 
-		fetchCategories(); // Appeler la fonction pour récupérer les catégories
+		fetchCategories();
 	});
 
 	// Fonction pour gérer l'upload de l'image
@@ -100,7 +92,7 @@
 	}
 </script>
 
-<!-- Section pour définir des éléments dans le <head> du document HTML, comme le titre et les meta-données -->
+<!-- Section <head> du document HTML avec titre et les meta-données -->
 <svelte:head>
 	<!-- Titre de la page -->
 	<title>Publier un Article | Blog_</title>

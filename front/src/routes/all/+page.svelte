@@ -1,14 +1,10 @@
 <!-- src/routes/all/+page.svelte -->
 
 <script lang="ts">
-	// Importation du type Article
 	import type { Article } from '../../app.d.ts';
-	// Importation des styles pour la page d'accueil
 	import '../../styles/home.scss';
-	// Importation de onMount pour exécuter du code après le montage du composant
 	import { onMount } from 'svelte';
 
-	// Déclaration d'un tableau pour stocker les articles
 	let articles: Article[] = [];
 
 	// URL dynamique basée sur les variables d'environnement
@@ -25,7 +21,7 @@
 	});
 </script>
 
-<!-- Section pour définir des éléments dans le <head> du document HTML, comme le titre et les meta-données -->
+<!-- Section <head> du document HTML avec titre et les meta-données -->
 <svelte:head>
 	<!-- Titre de la page -->
 	<title>Tous les articles | Blog_</title>

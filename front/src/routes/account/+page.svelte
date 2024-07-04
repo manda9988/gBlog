@@ -1,21 +1,14 @@
 <!-- src/routes/account/+page.svelte -->
 
 <script lang="ts">
-	// Importation de onMount pour exécuter du code après le montage du composant
 	import { onMount } from 'svelte';
-	// Importation de goto pour la navigation
 	import { goto } from '$app/navigation';
-	// Importation du store pour vérifier si l'utilisateur est connecté
 	import { isLoggedIn } from '../../lib/authStore';
-	// Importation du type Article
 	import type { Article } from '../../app.d.ts';
-	// Importation des styles
 	import '../../styles/account.scss';
 
-	// Déclaration d'un tableau pour stocker les articles
 	let articles: Article[] = [];
 
-	// URL dynamique basée sur les variables d'environnement
 	const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 	// Code à exécuter après le montage du composant
@@ -57,7 +50,7 @@
 	}
 </script>
 
-<!-- Section pour définir des éléments dans le <head> du document HTML, comme le titre et les meta-données -->
+<!-- Section <head> du document HTML avec titre et les meta-données -->
 <svelte:head>
 	<!-- Titre de la page -->
 	<title>Compte Utilisateur | Blog_</title>
