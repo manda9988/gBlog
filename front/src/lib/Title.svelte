@@ -1,7 +1,7 @@
 <!-- src/lib/Title.svelte -->
 
 <script>
-	export let title = 'Blog_';
+	export let title = 'Blog _';
 </script>
 
 <a href="/">
